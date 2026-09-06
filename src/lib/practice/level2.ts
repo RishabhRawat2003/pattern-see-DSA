@@ -1,5 +1,145 @@
 import type { PracticePack } from "../types";
 import { gfg, langs, lc, pack } from "./helpers";
+import {
+  activitySelectionGfgSolution,
+  minArrowsActivitySolution,
+  nonOverlappingActivitySolution,
+} from "./solutions/activitySelection";
+import {
+  balancedBinaryTreeBalancedSolution,
+  maxDepthBalancedSolution,
+  sortedArrayToBSTSolution,
+} from "./solutions/balancedTree";
+import {
+  binaryTreeLevelOrderTraversalIISolution,
+  binaryTreeLevelOrderTraversalSolution,
+  binaryTreeRightSideViewSolution,
+} from "./solutions/bfsLevelOrder";
+import {
+  flowerPlantingWithNoAdjacentSolution,
+  isGraphBipartiteSolution,
+  possibleBipartitionSolution,
+} from "./solutions/bipartite";
+import {
+  deleteNodeInABSTSolution,
+  insertIntoABinarySearchTreeSolution,
+  searchInABinarySearchTreeSolution,
+} from "./solutions/bstInsertDelete";
+import {
+  minimumAbsoluteDifferenceInBSTSolution,
+  recoverBinarySearchTreeSolution,
+  validateBinarySearchTreeSolution,
+} from "./solutions/bstValidation";
+import {
+  combinationSumIISolution,
+  combinationSumIIISolution,
+  combinationSumL2Solution,
+} from "./solutions/combinationSumL2";
+import {
+  findIfPathExistsSolution,
+  numberOfIslandsCCSolution,
+  numberOfProvincesSolution,
+} from "./solutions/connectedComponents";
+import {
+  binaryTreeInorderTraversalSolution,
+  binaryTreePostorderTraversalSolution,
+  binaryTreePreorderTraversalSolution,
+} from "./solutions/dfsTraversals";
+import {
+  cloneGraphSolution,
+  maxAreaOfIslandSolution,
+  numberOfIslandsSolution,
+} from "./solutions/graphBfsDfs";
+import {
+  courseScheduleIISolution,
+  courseScheduleSolution,
+  findEventualSafeStatesSolution,
+} from "./solutions/graphCycle";
+import {
+  reorganizeStringSolution,
+  sortByFrequencyHeapSolution,
+  topKFrequentHeapSolution,
+} from "./solutions/heapHashmap";
+import {
+  balancedBinaryTreeSolution,
+  diameterOfBinaryTreeSolution,
+  maximumDepthOfBinaryTreeSolution,
+} from "./solutions/heightDiameter";
+import {
+  bstIteratorSolution,
+  kthSmallestInorderSolution,
+  validateBSTInorderSolution,
+} from "./solutions/inorderLogic";
+import {
+  maxLengthOfPairChainSolution,
+  minArrowsScheduleSolution,
+  nonOverlappingScheduleSolution,
+} from "./solutions/intervalScheduling";
+import {
+  courseScheduleIIISolution,
+  jobSequencingGfgSolution,
+  maxProfitJobSchedulingSolution,
+} from "./solutions/jobSequencing";
+import {
+  kthLargestArraySolution,
+  kthLargestStreamSolution,
+  thirdMaximumSolution,
+} from "./solutions/kthLargest";
+import {
+  kthLargestElementInAnArraySolution,
+  kthSmallestElementInABSTSolution,
+  kthSmallestElementInASortedMatrixSolution,
+} from "./solutions/kthSmallest";
+import {
+  lowestCommonAncestorOfABinarySearchTreeSolution,
+  lowestCommonAncestorOfABinaryTreeSolution,
+  lowestCommonAncestorOfDeepestLeavesSolution,
+} from "./solutions/lca";
+import {
+  insertIntervalSolution,
+  mergeIntervalsSolution,
+  nonOverlappingMergeSolution,
+} from "./solutions/mergeIntervals";
+import {
+  kthSmallestInSortedMatrixSolution,
+  mergeKListsMergeKSolution,
+  smallestRangeCoveringKListsSolution,
+} from "./solutions/mergeKLists";
+import {
+  carPoolingPlatformsSolution,
+  meetingRoomsIISolution,
+  minimumPlatformsSolution,
+} from "./solutions/minimumPlatforms";
+import {
+  nQueensIISolution,
+  nQueensSolution,
+  sudokuSolverNQueensPackSolution,
+} from "./solutions/nQueens";
+import {
+  pathSumIISolution,
+  pathSumIIISolution,
+  pathSumSolution,
+} from "./solutions/pathSumL2";
+import {
+  nextPermutationSolution,
+  permutationsIISolution,
+  permutationsL2Solution,
+} from "./solutions/permutationsL2";
+import {
+  letterCasePermutationSolution,
+  subsetsIISolution,
+  subsetsL2Solution,
+} from "./solutions/subsetsL2";
+import {
+  nQueensFromSudokuSolution,
+  sudokuSolverSolution,
+  validSudokuSolution,
+} from "./solutions/sudokuSolver";
+import {
+  kClosestPointsToOriginSolution,
+  kthLargestTopKSolution,
+  topKFrequentTopKSolution,
+} from "./solutions/topK";
 
 export const level2Practice: Record<string, PracticePack> = {
   "dfs-traversals": pack(
@@ -44,9 +184,9 @@ void walk(TreeNode n, List<Integer> out) {
   return out;
 }`,
     ),
-    lc("binary-tree-inorder-traversal", "Inorder Traversal", "Easy"),
-    lc("binary-tree-preorder-traversal", "Preorder Traversal", "Easy"),
-    lc("binary-tree-postorder-traversal", "Postorder Traversal", "Easy"),
+    lc("binary-tree-inorder-traversal", "Inorder Traversal", "Easy", binaryTreeInorderTraversalSolution),
+    lc("binary-tree-preorder-traversal", "Preorder Traversal", "Easy", binaryTreePreorderTraversalSolution),
+    lc("binary-tree-postorder-traversal", "Postorder Traversal", "Easy", binaryTreePostorderTraversalSolution),
   ),
   "bfs-level-order": pack(
     "Queue of nodes; drain one level at a time.",
@@ -119,9 +259,9 @@ def level_order(root):
   return out;
 }`,
     ),
-    lc("binary-tree-level-order-traversal", "Level Order", "Medium"),
-    lc("binary-tree-level-order-traversal-ii", "Level Order II", "Medium"),
-    lc("binary-tree-right-side-view", "Right Side View", "Medium"),
+    lc("binary-tree-level-order-traversal", "Level Order", "Medium", binaryTreeLevelOrderTraversalSolution),
+    lc("binary-tree-level-order-traversal-ii", "Level Order II", "Medium", binaryTreeLevelOrderTraversalIISolution),
+    lc("binary-tree-right-side-view", "Right Side View", "Medium", binaryTreeRightSideViewSolution),
   ),
   "height-diameter": pack(
     "Height of node = 1 + max(left, right). Diameter uses heights of both sides.",
@@ -172,9 +312,9 @@ int height(TreeNode n) {
   return best;
 }`,
     ),
-    lc("maximum-depth-of-binary-tree", "Max Depth", "Easy"),
-    lc("diameter-of-binary-tree", "Diameter", "Easy"),
-    lc("balanced-binary-tree", "Balanced Binary Tree", "Easy"),
+    lc("maximum-depth-of-binary-tree", "Max Depth", "Easy", maximumDepthOfBinaryTreeSolution),
+    lc("diameter-of-binary-tree", "Diameter", "Easy", diameterOfBinaryTreeSolution),
+    lc("balanced-binary-tree", "Balanced Binary Tree", "Easy", balancedBinaryTreeSolution),
   ),
   "balanced-tree": pack(
     "Return height or -1 if a subtree is unbalanced (|L-R|>1).",
@@ -216,9 +356,9 @@ boolean isBalanced(TreeNode root) {
   return walk(root) >= 0;
 }`,
     ),
-    lc("balanced-binary-tree", "Balanced Binary Tree", "Easy"),
-    lc("convert-sorted-array-to-binary-search-tree", "Sorted Array to BST", "Easy"),
-    lc("maximum-depth-of-binary-tree", "Max Depth", "Easy"),
+    lc("balanced-binary-tree", "Balanced Binary Tree", "Easy", balancedBinaryTreeBalancedSolution),
+    lc("convert-sorted-array-to-binary-search-tree", "Sorted Array to BST", "Easy", sortedArrayToBSTSolution),
+    lc("maximum-depth-of-binary-tree", "Max Depth", "Easy", maxDepthBalancedSolution),
   ),
   lca: pack(
     "If p and q are in different subtrees, node is LCA. BST: walk by value.",
@@ -248,9 +388,9 @@ boolean isBalanced(TreeNode root) {
   return L && R ? root : L || R;
 }`,
     ),
-    lc("lowest-common-ancestor-of-a-binary-tree", "LCA of Binary Tree", "Medium"),
-    lc("lowest-common-ancestor-of-a-binary-search-tree", "LCA of BST", "Medium"),
-    lc("lowest-common-ancestor-of-deepest-leaves", "LCA of Deepest Leaves", "Medium"),
+    lc("lowest-common-ancestor-of-a-binary-tree", "LCA of Binary Tree", "Medium", lowestCommonAncestorOfABinaryTreeSolution),
+    lc("lowest-common-ancestor-of-a-binary-search-tree", "LCA of BST", "Medium", lowestCommonAncestorOfABinarySearchTreeSolution),
+    lc("lowest-common-ancestor-of-deepest-leaves", "LCA of Deepest Leaves", "Medium", lowestCommonAncestorOfDeepestLeavesSolution),
   ),
   "path-sum": pack(
     "Carry remaining target down; record when a leaf hits 0.",
@@ -281,9 +421,9 @@ boolean isBalanced(TreeNode root) {
   return hasPathSum(root.left, rest) || hasPathSum(root.right, rest);
 }`,
     ),
-    lc("path-sum", "Path Sum", "Easy"),
-    lc("path-sum-ii", "Path Sum II", "Medium"),
-    lc("path-sum-iii", "Path Sum III", "Medium"),
+    lc("path-sum", "Path Sum", "Easy", pathSumSolution),
+    lc("path-sum-ii", "Path Sum II", "Medium", pathSumIISolution),
+    lc("path-sum-iii", "Path Sum III", "Medium", pathSumIIISolution),
   ),
   "bst-validation": pack(
     "Each node must lie in (low, high). Tighten bounds as you descend.",
@@ -315,9 +455,9 @@ boolean isValidBST(TreeNode root) {
   return isValidBST(root.left, lo, root.val) && isValidBST(root.right, root.val, hi);
 }`,
     ),
-    lc("validate-binary-search-tree", "Validate BST", "Medium"),
-    lc("minimum-absolute-difference-in-bst", "Min Abs Difference", "Easy"),
-    lc("recover-binary-search-tree", "Recover BST", "Medium"),
+    lc("validate-binary-search-tree", "Validate BST", "Medium", validateBinarySearchTreeSolution),
+    lc("minimum-absolute-difference-in-bst", "Min Abs Difference", "Easy", minimumAbsoluteDifferenceInBSTSolution),
+    lc("recover-binary-search-tree", "Recover BST", "Medium", recoverBinarySearchTreeSolution),
   ),
   "bst-insert-delete": pack(
     "Walk by compare. Delete: 0/1 child splice, 2 children → inorder successor.",
@@ -349,9 +489,9 @@ boolean isValidBST(TreeNode root) {
   return root;
 }`,
     ),
-    lc("search-in-a-binary-search-tree", "Search in BST", "Easy"),
-    lc("insert-into-a-binary-search-tree", "Insert into BST", "Medium"),
-    lc("delete-node-in-a-bst", "Delete Node in BST", "Medium"),
+    lc("search-in-a-binary-search-tree", "Search in BST", "Easy", searchInABinarySearchTreeSolution),
+    lc("insert-into-a-binary-search-tree", "Insert into BST", "Medium", insertIntoABinarySearchTreeSolution),
+    lc("delete-node-in-a-bst", "Delete Node in BST", "Medium", deleteNodeInABSTSolution),
   ),
   "kth-smallest": pack(
     "Inorder of a BST is sorted. Count until k.",
@@ -398,9 +538,9 @@ boolean isValidBST(TreeNode root) {
   }
 }`,
     ),
-    lc("kth-smallest-element-in-a-bst", "Kth Smallest in BST", "Medium"),
-    lc("kth-largest-element-in-an-array", "Kth Largest in Array", "Medium"),
-    lc("kth-smallest-element-in-a-sorted-matrix", "Kth Smallest in Matrix", "Medium"),
+    lc("kth-smallest-element-in-a-bst", "Kth Smallest in BST", "Medium", kthSmallestElementInABSTSolution),
+    lc("kth-largest-element-in-an-array", "Kth Largest in Array", "Medium", kthLargestElementInAnArraySolution),
+    lc("kth-smallest-element-in-a-sorted-matrix", "Kth Smallest in Matrix", "Medium", kthSmallestElementInASortedMatrixSolution),
   ),
   "inorder-logic": pack(
     "BST problems that become array problems if you inorder-walk.",
@@ -448,9 +588,9 @@ int next() {
   };
 }`,
     ),
-    lc("binary-search-tree-iterator", "BST Iterator", "Medium"),
-    lc("validate-binary-search-tree", "Validate BST", "Medium"),
-    lc("kth-smallest-element-in-a-bst", "Kth Smallest in BST", "Medium"),
+    lc("binary-search-tree-iterator", "BST Iterator", "Medium", bstIteratorSolution),
+    lc("validate-binary-search-tree", "Validate BST", "Medium", validateBSTInorderSolution),
+    lc("kth-smallest-element-in-a-bst", "Kth Smallest in BST", "Medium", kthSmallestInorderSolution),
   ),
   "top-k": pack(
     "Min-heap of size k, or count + heap / quickselect.",
@@ -491,9 +631,9 @@ def top_k(nums, k):
   return [...freq.keys()].sort((a, b) => freq.get(b) - freq.get(a)).slice(0, k);
 }`,
     ),
-    lc("top-k-frequent-elements", "Top K Frequent", "Medium"),
-    lc("kth-largest-element-in-an-array", "Kth Largest", "Medium"),
-    lc("k-closest-points-to-origin", "K Closest Points", "Medium"),
+    lc("top-k-frequent-elements", "Top K Frequent", "Medium", topKFrequentTopKSolution),
+    lc("kth-largest-element-in-an-array", "Kth Largest", "Medium", kthLargestTopKSolution),
+    lc("k-closest-points-to-origin", "K Closest Points", "Medium", kClosestPointsToOriginSolution),
   ),
   "kth-largest": pack(
     "Min-heap of k largest. Root is the kth.",
@@ -533,9 +673,9 @@ def kth_largest(a, k):
   return heap[0];
 }`,
     ),
-    lc("kth-largest-element-in-an-array", "Kth Largest in Array", "Medium"),
-    lc("kth-largest-element-in-a-stream", "Kth Largest in Stream", "Easy"),
-    lc("third-maximum-number", "Third Maximum Number", "Easy"),
+    lc("kth-largest-element-in-an-array", "Kth Largest in Array", "Medium", kthLargestArraySolution),
+    lc("kth-largest-element-in-a-stream", "Kth Largest in Stream", "Easy", kthLargestStreamSolution),
+    lc("third-maximum-number", "Third Maximum Number", "Easy", thirdMaximumSolution),
   ),
   "merge-k-lists": pack(
     "Heap of current heads. Pop min, push that list's next.",
@@ -591,9 +731,9 @@ def merge_k(lists):
   return dummy.next;
 }`,
     ),
-    lc("merge-k-sorted-lists", "Merge k Sorted Lists", "Hard"),
-    lc("kth-smallest-element-in-a-sorted-matrix", "Kth Smallest in Matrix", "Medium"),
-    lc("smallest-range-covering-elements-from-k-lists", "Smallest Range k Lists", "Hard"),
+    lc("merge-k-sorted-lists", "Merge k Sorted Lists", "Hard", mergeKListsMergeKSolution),
+    lc("kth-smallest-element-in-a-sorted-matrix", "Kth Smallest in Matrix", "Medium", kthSmallestInSortedMatrixSolution),
+    lc("smallest-range-covering-elements-from-k-lists", "Smallest Range k Lists", "Hard", smallestRangeCoveringKListsSolution),
   ),
   "heap-hashmap": pack(
     "Count frequencies, heap by count (reorganize, top-k, greedy pick).",
@@ -633,9 +773,9 @@ def reorganize(s):
   return h;
 }`,
     ),
-    lc("top-k-frequent-elements", "Top K Frequent", "Medium"),
-    lc("sort-characters-by-frequency", "Sort by Frequency", "Medium"),
-    lc("reorganize-string", "Reorganize String", "Medium"),
+    lc("top-k-frequent-elements", "Top K Frequent", "Medium", topKFrequentHeapSolution),
+    lc("sort-characters-by-frequency", "Sort by Frequency", "Medium", sortByFrequencyHeapSolution),
+    lc("reorganize-string", "Reorganize String", "Medium", reorganizeStringSolution),
   ),
   "activity-selection": pack(
     "Sort by finish time. Take if start >= last finish.",
@@ -673,9 +813,9 @@ def reorganize(s):
   return taken;
 }`,
     ),
-    gfg("activity-selection-problem-greedy-algo-1", "Activity Selection", "Medium"),
-    lc("non-overlapping-intervals", "Non-overlapping Intervals", "Medium"),
-    lc("minimum-number-of-arrows-to-burst-balloons", "Burst Balloons (Arrows)", "Medium"),
+    gfg("activity-selection-problem-greedy-algo-1", "Activity Selection", "Medium", activitySelectionGfgSolution),
+    lc("non-overlapping-intervals", "Non-overlapping Intervals", "Medium", nonOverlappingActivitySolution),
+    lc("minimum-number-of-arrows-to-burst-balloons", "Burst Balloons (Arrows)", "Medium", minArrowsActivitySolution),
   ),
   "interval-scheduling": pack(
     "Same greedy as activity selection: earliest finish, skip overlaps.",
@@ -713,9 +853,9 @@ def reorganize(s):
   return intervals.length - keep;
 }`,
     ),
-    lc("non-overlapping-intervals", "Non-overlapping Intervals", "Medium"),
-    lc("minimum-number-of-arrows-to-burst-balloons", "Min Arrows", "Medium"),
-    lc("maximum-length-of-pair-chain", "Max Pair Chain", "Medium"),
+    lc("non-overlapping-intervals", "Non-overlapping Intervals", "Medium", nonOverlappingScheduleSolution),
+    lc("minimum-number-of-arrows-to-burst-balloons", "Min Arrows", "Medium", minArrowsScheduleSolution),
+    lc("maximum-length-of-pair-chain", "Max Pair Chain", "Medium", maxLengthOfPairChainSolution),
   ),
   "merge-intervals": pack(
     "Sort by start. If next.start <= cur.end, extend end.",
@@ -757,9 +897,9 @@ def reorganize(s):
   return out;
 }`,
     ),
-    lc("merge-intervals", "Merge Intervals", "Medium"),
-    lc("insert-interval", "Insert Interval", "Medium"),
-    lc("non-overlapping-intervals", "Non-overlapping Intervals", "Medium"),
+    lc("merge-intervals", "Merge Intervals", "Medium", mergeIntervalsSolution),
+    lc("insert-interval", "Insert Interval", "Medium", insertIntervalSolution),
+    lc("non-overlapping-intervals", "Non-overlapping Intervals", "Medium", nonOverlappingMergeSolution),
   ),
   "minimum-platforms": pack(
     "Sort arrivals and departures. Sweep: +1 on arrive, -1 on leave.",
@@ -806,9 +946,9 @@ def reorganize(s):
   return best;
 }`,
     ),
-    gfg("minimum-platforms-public-transport-sorting", "Minimum Platforms", "Medium"),
-    lc("meeting-rooms-ii", "Meeting Rooms II", "Medium"),
-    lc("car-pooling", "Car Pooling", "Medium"),
+    gfg("minimum-platforms-public-transport-sorting", "Minimum Platforms", "Medium", minimumPlatformsSolution),
+    lc("meeting-rooms-ii", "Meeting Rooms II", "Medium", meetingRoomsIISolution),
+    lc("car-pooling", "Car Pooling", "Medium", carPoolingPlatformsSolution),
   ),
   "job-sequencing": pack(
     "Sort by profit. Place each job in the latest free slot <= deadline.",
@@ -862,9 +1002,9 @@ def reorganize(s):
   return slot;
 }`,
     ),
-    gfg("job-sequencing-problem", "Job Sequencing", "Medium"),
-    lc("maximum-profit-in-job-scheduling", "Max Profit Job Scheduling", "Hard"),
-    lc("course-schedule-iii", "Course Schedule III", "Hard"),
+    gfg("job-sequencing-problem", "Job Sequencing", "Medium", jobSequencingGfgSolution),
+    lc("maximum-profit-in-job-scheduling", "Max Profit Job Scheduling", "Hard", maxProfitJobSchedulingSolution),
+    lc("course-schedule-iii", "Course Schedule III", "Hard", courseScheduleIIISolution),
   ),
   "graph-bfs-dfs": pack(
     "DFS stack/recursion vs BFS queue. Same graph, different order.",
@@ -921,9 +1061,9 @@ def bfs(graph, start):
   return order;
 }`,
     ),
-    lc("number-of-islands", "Number of Islands", "Medium"),
-    lc("clone-graph", "Clone Graph", "Medium"),
-    lc("max-area-of-island", "Max Area of Island", "Medium"),
+    lc("number-of-islands", "Number of Islands", "Medium", numberOfIslandsSolution),
+    lc("clone-graph", "Clone Graph", "Medium", cloneGraphSolution),
+    lc("max-area-of-island", "Max Area of Island", "Medium", maxAreaOfIslandSolution),
   ),
   "connected-components": pack(
     "Each unvisited start is a new component (DFS/BFS or DSU).",
@@ -985,9 +1125,9 @@ void dfs(int u, List<Integer>[] g, boolean[] seen) {
   return count;
 }`,
     ),
-    lc("number-of-provinces", "Number of Provinces", "Medium"),
-    lc("number-of-islands", "Number of Islands", "Medium"),
-    lc("find-if-path-exists-in-graph", "Find if Path Exists", "Easy"),
+    lc("number-of-provinces", "Number of Provinces", "Medium", numberOfProvincesSolution),
+    lc("number-of-islands", "Number of Islands", "Medium", numberOfIslandsCCSolution),
+    lc("find-if-path-exists-in-graph", "Find if Path Exists", "Easy", findIfPathExistsSolution),
   ),
   "graph-cycle": pack(
     "Directed: gray node on the stack = back edge. Undirected: DSU or parent skip.",
@@ -1048,9 +1188,9 @@ boolean dfs(int u, List<List<Integer>> g, int[] color, int GRAY, int BLACK) {
   return Object.keys(g).some(u => color[u] === WHITE && dfs(u));
 }`,
     ),
-    lc("course-schedule", "Course Schedule", "Medium"),
-    lc("course-schedule-ii", "Course Schedule II", "Medium"),
-    lc("find-eventual-safe-states", "Eventual Safe States", "Medium"),
+    lc("course-schedule", "Course Schedule", "Medium", courseScheduleSolution),
+    lc("course-schedule-ii", "Course Schedule II", "Medium", courseScheduleIISolution),
+    lc("find-eventual-safe-states", "Eventual Safe States", "Medium", findEventualSafeStatesSolution),
   ),
   bipartite: pack(
     "2-color BFS/DFS. Neighbor must get the other color.",
@@ -1120,9 +1260,9 @@ def is_bipartite(graph):
   return true;
 }`,
     ),
-    lc("is-graph-bipartite", "Is Graph Bipartite?", "Medium"),
-    lc("possible-bipartition", "Possible Bipartition", "Medium"),
-    lc("flower-planting-with-no-adjacent", "Flower Planting", "Medium"),
+    lc("is-graph-bipartite", "Is Graph Bipartite?", "Medium", isGraphBipartiteSolution),
+    lc("possible-bipartition", "Possible Bipartition", "Medium", possibleBipartitionSolution),
+    lc("flower-planting-with-no-adjacent", "Flower Planting", "Medium", flowerPlantingWithNoAdjacentSolution),
   ),
   subsets: pack(
     "For each index, skip or pick. Record at the leaf (or every node).",
@@ -1176,9 +1316,9 @@ List<List<Integer>> subsets(int[] nums) {
   return out;
 }`,
     ),
-    lc("subsets", "Subsets", "Medium"),
-    lc("subsets-ii", "Subsets II", "Medium"),
-    lc("letter-case-permutation", "Letter Case Permutation", "Medium"),
+    lc("subsets", "Subsets", "Medium", subsetsL2Solution),
+    lc("subsets-ii", "Subsets II", "Medium", subsetsIISolution),
+    lc("letter-case-permutation", "Letter Case Permutation", "Medium", letterCasePermutationSolution),
   ),
   permutations: pack(
     "Place an unused value in the next slot, recurse, unmark.",
@@ -1239,9 +1379,9 @@ List<List<Integer>> permute(int[] nums) {
   return out;
 }`,
     ),
-    lc("permutations", "Permutations", "Medium"),
-    lc("permutations-ii", "Permutations II", "Medium"),
-    lc("next-permutation", "Next Permutation", "Medium"),
+    lc("permutations", "Permutations", "Medium", permutationsL2Solution),
+    lc("permutations-ii", "Permutations II", "Medium", permutationsIISolution),
+    lc("next-permutation", "Next Permutation", "Medium", nextPermutationSolution),
   ),
   "combination-sum": pack(
     "Reuse allowed: stay on i after pick. Prune remainder < 0.",
@@ -1305,9 +1445,9 @@ List<List<Integer>> combinationSum(int[] cands, int target) {
   return out;
 }`,
     ),
-    lc("combination-sum", "Combination Sum", "Medium"),
-    lc("combination-sum-ii", "Combination Sum II", "Medium"),
-    lc("combination-sum-iii", "Combination Sum III", "Medium"),
+    lc("combination-sum", "Combination Sum", "Medium", combinationSumL2Solution),
+    lc("combination-sum-ii", "Combination Sum II", "Medium", combinationSumIISolution),
+    lc("combination-sum-iii", "Combination Sum III", "Medium", combinationSumIIISolution),
   ),
   "n-queens": pack(
     "One queen per row. Ban column and both diagonals. Undo on backtrack.",
@@ -1391,9 +1531,9 @@ List<List<String>> solveNQueens(int n) {
   return out;
 }`,
     ),
-    lc("n-queens", "N-Queens", "Hard"),
-    lc("n-queens-ii", "N-Queens II", "Hard"),
-    lc("sudoku-solver", "Sudoku Solver", "Hard"),
+    lc("n-queens", "N-Queens", "Hard", nQueensSolution),
+    lc("n-queens-ii", "N-Queens II", "Hard", nQueensIISolution),
+    lc("sudoku-solver", "Sudoku Solver", "Hard", sudokuSolverNQueensPackSolution),
   ),
   "sudoku-solver": pack(
     "Empty cell: try 1-9 legal for row/col/box, recurse, undo.",
@@ -1432,8 +1572,8 @@ List<List<String>> solveNQueens(int n) {
   return true;
 }`,
     ),
-    lc("valid-sudoku", "Valid Sudoku", "Medium"),
-    lc("sudoku-solver", "Sudoku Solver", "Hard"),
-    lc("n-queens", "N-Queens", "Hard"),
+    lc("valid-sudoku", "Valid Sudoku", "Medium", validSudokuSolution),
+    lc("sudoku-solver", "Sudoku Solver", "Hard", sudokuSolverSolution),
+    lc("n-queens", "N-Queens", "Hard", nQueensFromSudokuSolution),
   ),
 };

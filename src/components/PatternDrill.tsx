@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { PatternPlayer } from "@/components/viz/PatternPlayer";
 import { templateLangs } from "@/lib/practice/helpers";
-import type { PracticePack, TemplateLang } from "@/lib/types";
+import type { PracticePack, PracticeProblem, TemplateLang } from "@/lib/types";
 import {
   getEntry,
   isDue,
@@ -18,6 +19,7 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
   const [entry, setEntry] = useState<PatternProgress>({ mark: "unset", solved: [] });
   const [copied, setCopied] = useState(false);
   const [lang, setLang] = useState<TemplateLang>("python");
+  const [openId, setOpenId] = useState<string | null>(null);
 
   const refresh = useCallback(() => {
     setEntry(getEntry(loadProgress(), slug));
@@ -48,42 +50,21 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
         <p className="mt-3 text-sm leading-7 text-paper/85">{pack.cue}</p>
       </div>
 
-      <div className="overflow-hidden rounded-2xl border border-[var(--line)]">
-        <div className="flex flex-col gap-3 border-b border-[var(--line)] bg-[var(--ink-2)] px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-4">
-          <div className="viz-scroll flex min-w-0 gap-1">
-            {templateLangs.map((l) => (
-              <button
-                key={l.id}
-                type="button"
-                className={`shrink-0 rounded-full px-3 py-1.5 text-xs ${
-                  lang === l.id ? "bg-saffron text-ink" : "text-muted hover:text-paper"
-                }`}
-                onClick={() => {
-                  setLang(l.id);
-                  window.localStorage.setItem(LANG_KEY, l.id);
-                  setCopied(false);
-                }}
-              >
-                {l.label}
-              </button>
-            ))}
-          </div>
-          <button
-            type="button"
-            className="btn btn-ghost w-fit px-3 py-1.5 text-xs"
-            onClick={async () => {
-              await navigator.clipboard.writeText(code);
-              setCopied(true);
-              window.setTimeout(() => setCopied(false), 1400);
-            }}
-          >
-            {copied ? "Copied" : "Copy"}
-          </button>
-        </div>
-        <pre className="viz-scroll max-h-[min(28rem,70vh)] overflow-auto bg-ink/50 px-4 py-4 font-mono text-[12px] leading-6 text-paper/90 sm:text-[13px]">
-          <code>{code}</code>
-        </pre>
-      </div>
+      <CodeBlock
+        lang={lang}
+        setLang={(l) => {
+          setLang(l);
+          window.localStorage.setItem(LANG_KEY, l);
+          setCopied(false);
+        }}
+        code={code}
+        copied={copied}
+        onCopy={async () => {
+          await navigator.clipboard.writeText(code);
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 1400);
+        }}
+      />
 
       <div className="surface rounded-2xl p-5">
         <div className="flex flex-wrap items-end justify-between gap-2">
@@ -97,29 +78,49 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
         <ul className="mt-4 space-y-2">
           {pack.problems.map((prob) => {
             const on = solvedSet.has(prob.id);
+            const hasSolution = Boolean(prob.templates && prob.frames);
+            const open = openId === prob.id;
             return (
               <li key={prob.id}>
-                <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-[var(--line)] px-3 py-3 hover:bg-paper/[0.04]">
-                  <input
-                    type="checkbox"
-                    checked={on}
-                    onChange={() => setEntry(toggleSolved(slug, prob.id))}
-                    className="mt-1 h-4 w-4 shrink-0 accent-[var(--saffron)]"
-                  />
-                  <span className="min-w-0 flex-1">
-                    <a
-                      href={prob.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-medium text-paper hover:text-saffron"
-                    >
-                      {prob.title}
-                    </a>
-                    <span className="mt-0.5 block font-mono text-[11px] text-muted">
-                      {prob.difficulty} · open ↗
-                    </span>
-                  </span>
-                </label>
+                <div className="rounded-xl border border-[var(--line)]">
+                  <div className="flex items-start gap-3 px-3 py-3">
+                    <label className="flex min-w-0 flex-1 cursor-pointer items-start gap-3 hover:opacity-95">
+                      <input
+                        type="checkbox"
+                        checked={on}
+                        onChange={() => setEntry(toggleSolved(slug, prob.id))}
+                        className="mt-1 h-4 w-4 shrink-0 accent-[var(--saffron)]"
+                      />
+                      <span className="min-w-0 flex-1">
+                        <a
+                          href={prob.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-medium text-paper hover:text-saffron"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          {prob.title}
+                        </a>
+                        <span className="mt-0.5 block font-mono text-[11px] text-muted">
+                          {prob.difficulty} · open ↗
+                        </span>
+                      </span>
+                    </label>
+                    {hasSolution ? (
+                      <button
+                        type="button"
+                        className={`shrink-0 rounded-full px-3 py-1.5 text-xs ${
+                          open ? "bg-saffron text-ink" : "text-muted hover:text-paper"
+                        }`}
+                        onClick={() => setOpenId(open ? null : prob.id)}
+                        aria-expanded={open}
+                      >
+                        {open ? "Hide" : "Solution"}
+                      </button>
+                    ) : null}
+                  </div>
+                  {open && hasSolution ? <ProblemSolutionPanel problem={prob} lang={lang} setLang={setLang} /> : null}
+                </div>
               </li>
             );
           })}
@@ -153,5 +154,91 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
         ) : null}
       </div>
     </section>
+  );
+}
+
+function ProblemSolutionPanel({
+  problem,
+  lang,
+  setLang,
+}: {
+  problem: PracticeProblem;
+  lang: TemplateLang;
+  setLang: (l: TemplateLang) => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  const code = problem.templates![lang];
+
+  return (
+    <div className="space-y-4 border-t border-[var(--line)] px-3 py-4 sm:px-4">
+      {problem.approach ? (
+        <p className="text-sm leading-7 text-paper/85">{problem.approach}</p>
+      ) : null}
+      {problem.frames?.length ? (
+        <div className="min-w-0">
+          <p className="kicker mb-3">Walkthrough</p>
+          <PatternPlayer key={problem.id} frames={problem.frames} />
+        </div>
+      ) : null}
+      <div>
+        <p className="kicker mb-3">Optimal solution</p>
+        <CodeBlock
+          lang={lang}
+          setLang={(l) => {
+            setLang(l);
+            window.localStorage.setItem(LANG_KEY, l);
+            setCopied(false);
+          }}
+          code={code}
+          copied={copied}
+          onCopy={async () => {
+            await navigator.clipboard.writeText(code);
+            setCopied(true);
+            window.setTimeout(() => setCopied(false), 1400);
+          }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function CodeBlock({
+  lang,
+  setLang,
+  code,
+  copied,
+  onCopy,
+}: {
+  lang: TemplateLang;
+  setLang: (l: TemplateLang) => void;
+  code: string;
+  copied: boolean;
+  onCopy: () => void;
+}) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-[var(--line)]">
+      <div className="flex flex-col gap-3 border-b border-[var(--line)] bg-[var(--ink-2)] px-3 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-4">
+        <div className="viz-scroll flex min-w-0 gap-1">
+          {templateLangs.map((l) => (
+            <button
+              key={l.id}
+              type="button"
+              className={`shrink-0 rounded-full px-3 py-1.5 text-xs ${
+                lang === l.id ? "bg-saffron text-ink" : "text-muted hover:text-paper"
+              }`}
+              onClick={() => setLang(l.id)}
+            >
+              {l.label}
+            </button>
+          ))}
+        </div>
+        <button type="button" className="btn btn-ghost w-fit px-3 py-1.5 text-xs" onClick={onCopy}>
+          {copied ? "Copied" : "Copy"}
+        </button>
+      </div>
+      <pre className="viz-scroll max-h-[min(28rem,70vh)] overflow-auto bg-ink/50 px-4 py-4 font-mono text-[12px] leading-6 text-paper/90 sm:text-[13px]">
+        <code>{code}</code>
+      </pre>
+    </div>
   );
 }

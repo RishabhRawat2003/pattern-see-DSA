@@ -1,4 +1,10 @@
-import type { PracticePack, PracticeProblem, ProblemDifficulty, TemplateLang } from "../types";
+import type {
+  Frame,
+  PracticePack,
+  PracticeProblem,
+  ProblemDifficulty,
+  TemplateLang,
+} from "../types";
 
 export const templateLangs: { id: TemplateLang; label: string }[] = [
   { id: "python", label: "Python" },
@@ -7,16 +13,30 @@ export const templateLangs: { id: TemplateLang; label: string }[] = [
   { id: "javascript", label: "JavaScript" },
 ];
 
+export type ProblemSolution = {
+  approach: string;
+  templates: Record<TemplateLang, string>;
+  frames: Frame[];
+};
+
 export function lc(
   path: string,
   title: string,
   difficulty: ProblemDifficulty,
+  solution?: ProblemSolution,
 ): PracticeProblem {
   return {
     id: path,
     title,
     difficulty,
     url: `https://leetcode.com/problems/${path}/`,
+    ...(solution
+      ? {
+          approach: solution.approach,
+          templates: solution.templates,
+          frames: solution.frames,
+        }
+      : {}),
   };
 }
 
@@ -24,12 +44,20 @@ export function gfg(
   path: string,
   title: string,
   difficulty: ProblemDifficulty,
+  solution?: ProblemSolution,
 ): PracticeProblem {
   return {
     id: `gfg-${path}`,
     title,
     difficulty,
     url: `https://www.geeksforgeeks.org/${path}/`,
+    ...(solution
+      ? {
+          approach: solution.approach,
+          templates: solution.templates,
+          frames: solution.frames,
+        }
+      : {}),
   };
 }
 

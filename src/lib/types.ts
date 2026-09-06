@@ -80,6 +80,9 @@ export type PracticeProblem = {
   title: string;
   difficulty: ProblemDifficulty;
   url: string;
+  approach?: string;
+  templates?: Record<TemplateLang, string>;
+  frames?: Frame[];
 };
 
 export type TemplateLang = "python" | "cpp" | "java" | "javascript";

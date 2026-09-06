@@ -1,5 +1,130 @@
 import type { PracticePack } from "../types";
 import { gfg, langs, lc, pack } from "./helpers";
+import {
+  generateParenthesesSolution,
+  permutationsSolution,
+  wordSearchSolution,
+} from "./solutions/backtrackingIntro";
+import {
+  capacityToShipPackagesSolution,
+  kokoEatingBananasSolution,
+  splitArrayLargestSumSolution,
+} from "./solutions/binarySearchOnAnswer";
+import {
+  binarySearchSolution,
+  searchInRotatedSortedArraySolution,
+  searchInsertPositionSolution,
+} from "./solutions/classicBinarySearch";
+import {
+  findTheDuplicateNumberSolution,
+  linkedListCycleDetectSolution,
+  linkedListCycleIISolution,
+} from "./solutions/cycleDetection";
+import {
+  carPoolingSolution,
+  corporateFlightBookingsSolution,
+  zeroArrayTransformationISolution,
+} from "./solutions/differenceArray";
+import {
+  happyNumberSolution as fastSlowHappyNumberSolution,
+  linkedListCycleSolution,
+  middleOfLinkedListSolution,
+} from "./solutions/fastSlowPointer";
+import {
+  findFirstAndLastPositionSolution,
+  firstBadVersionSolution,
+  sqrtxSolution,
+} from "./solutions/firstLastOccurrence";
+import {
+  firstUniqueCharacterSolution,
+  groupAnagramsSolution as frequencyGroupAnagramsSolution,
+  sortCharactersByFrequencySolution,
+} from "./solutions/frequencyCounting";
+import {
+  majorityElementSolution,
+  topKFrequentElementsSolution,
+  validAnagramSolution,
+} from "./solutions/frequencyMap";
+import {
+  containsDuplicateIISolution,
+  containsDuplicateSolution,
+  twoSumSolution,
+} from "./solutions/hashmapLookup";
+import {
+  basicCalculatorIISolution,
+  evaluateRPNSolution,
+  infixToPostfixSolution,
+} from "./solutions/infixPrefixPostfix";
+import {
+  maximumProductSubarraySolution,
+  maximumSubarraySolution,
+  maximumSumCircularSubarraySolution,
+} from "./solutions/kadane";
+import {
+  firstLastBoundSolution,
+  searchInsertBoundSolution,
+  smallestLetterGreaterSolution,
+} from "./solutions/lowerUpperBound";
+import {
+  mergeKSortedListsSolution,
+  mergeSortedArraySolution,
+  mergeTwoSortedListsSolution,
+} from "./solutions/mergeLists";
+import {
+  dailyTemperaturesMonoSolution,
+  largestRectangleInHistogramSolution,
+  trappingRainWaterSolution,
+} from "./solutions/monotonicStack";
+import {
+  dailyTemperaturesNGESolution,
+  nextGreaterElementIISolution,
+  nextGreaterElementISolution,
+} from "./solutions/nextGreaterElement";
+import {
+  combinationSumSolution,
+  pathSumSolution,
+  subsetsSolution,
+} from "./solutions/pickNotPick";
+import {
+  findPivotIndexSolution,
+  rangeSumQueryImmutableSolution,
+  subarraySumEqualsKSolution,
+} from "./solutions/prefixSum";
+import {
+  invertBinaryTreeSolution,
+  maximumDepthOfBinaryTreeSolution,
+  symmetricTreeSolution,
+} from "./solutions/recursiveTree";
+import {
+  reverseLinkedListIISolution,
+  reverseLinkedListSolution,
+  reverseNodesInKGroupSolution,
+} from "./solutions/reverseLinkedList";
+import {
+  containsDuplicateSetSolution,
+  happyNumberSolution as setHappyNumberSolution,
+  longestConsecutiveSequenceSolution,
+} from "./solutions/setDetection";
+import {
+  longestSubstringWithoutRepeatingSolution,
+  maximumAverageSubarrayISolution,
+  minimumWindowSubstringSolution,
+} from "./solutions/slidingWindow";
+import {
+  groupAnagramsSolution as sortingGroupAnagramsSolution,
+  sortingThreeSumSolution,
+  sortingValidAnagramSolution,
+} from "./solutions/sortingTricks";
+import {
+  containerWithMostWaterSolution,
+  threeSumSolution,
+  twoSumIISolution,
+} from "./solutions/twoPointers";
+import {
+  longestValidParenthesesSolution,
+  minAddToMakeValidSolution,
+  validParenthesesSolution,
+} from "./solutions/validParentheses";
 
 export const level1Practice: Record<string, PracticePack> = {
   "two-pointers": pack(
@@ -47,9 +172,9 @@ export const level1Practice: Record<string, PracticePack> = {
   return null;
 }`,
     ),
-    lc("two-sum-ii-input-array-is-sorted", "Two Sum II", "Medium"),
-    lc("3sum", "3Sum", "Medium"),
-    lc("container-with-most-water", "Container With Most Water", "Medium"),
+    lc("two-sum-ii-input-array-is-sorted", "Two Sum II", "Medium", twoSumIISolution),
+    lc("3sum", "3Sum", "Medium", threeSumSolution),
+    lc("container-with-most-water", "Container With Most Water", "Medium", containerWithMostWaterSolution),
   ),
   "sliding-window": pack(
     "Contiguous subarray/substring; expand right, shrink left when a constraint breaks.",
@@ -89,9 +214,9 @@ export const level1Practice: Record<string, PracticePack> = {
   return best;
 }`,
     ),
-    lc("maximum-average-subarray-i", "Max Average Subarray I", "Easy"),
-    lc("longest-substring-without-repeating-characters", "Longest Unique Substring", "Medium"),
-    lc("minimum-window-substring", "Minimum Window Substring", "Hard"),
+    lc("maximum-average-subarray-i", "Max Average Subarray I", "Easy", maximumAverageSubarrayISolution),
+    lc("longest-substring-without-repeating-characters", "Longest Unique Substring", "Medium", longestSubstringWithoutRepeatingSolution),
+    lc("minimum-window-substring", "Minimum Window Substring", "Hard", minimumWindowSubstringSolution),
   ),
   "prefix-sum": pack(
     "Many range sums, equilibrium, or subarray sum = k (with a map).",
@@ -119,9 +244,9 @@ export const level1Practice: Record<string, PracticePack> = {
   return (l, r) => pref[r + 1] - pref[l];
 }`,
     ),
-    lc("range-sum-query-immutable", "Range Sum Query", "Easy"),
-    lc("find-pivot-index", "Pivot Index", "Easy"),
-    lc("subarray-sum-equals-k", "Subarray Sum Equals K", "Medium"),
+    lc("range-sum-query-immutable", "Range Sum Query", "Easy", rangeSumQueryImmutableSolution),
+    lc("find-pivot-index", "Pivot Index", "Easy", findPivotIndexSolution),
+    lc("subarray-sum-equals-k", "Subarray Sum Equals K", "Medium", subarraySumEqualsKSolution),
   ),
   "difference-array": pack(
     "Many range add updates, then one reconstruct via prefix.",
@@ -161,9 +286,9 @@ export const level1Practice: Record<string, PracticePack> = {
   return out;
 }`,
     ),
-    lc("corporate-flight-bookings", "Corporate Flight Bookings", "Medium"),
-    lc("car-pooling", "Car Pooling", "Medium"),
-    lc("zero-array-transformation-i", "Zero Array Transformation I", "Medium"),
+    lc("corporate-flight-bookings", "Corporate Flight Bookings", "Medium", corporateFlightBookingsSolution),
+    lc("car-pooling", "Car Pooling", "Medium", carPoolingSolution),
+    lc("zero-array-transformation-i", "Zero Array Transformation I", "Medium", zeroArrayTransformationISolution),
   ),
   kadane: pack(
     "Maximum contiguous subarray (negatives allowed).",
@@ -199,9 +324,9 @@ export const level1Practice: Record<string, PracticePack> = {
   return best;
 }`,
     ),
-    lc("maximum-subarray", "Maximum Subarray", "Medium"),
-    lc("maximum-product-subarray", "Maximum Product Subarray", "Medium"),
-    lc("maximum-sum-circular-subarray", "Maximum Sum Circular", "Medium"),
+    lc("maximum-subarray", "Maximum Subarray", "Medium", maximumSubarraySolution),
+    lc("maximum-product-subarray", "Maximum Product Subarray", "Medium", maximumProductSubarraySolution),
+    lc("maximum-sum-circular-subarray", "Maximum Sum Circular", "Medium", maximumSumCircularSubarraySolution),
   ),
   "sorting-tricks": pack(
     "Order is the algorithm: adjacent compare, two pointers after sort, or sort-as-key.",
@@ -238,9 +363,9 @@ export const level1Practice: Record<string, PracticePack> = {
   return pair;
 }`,
     ),
-    lc("valid-anagram", "Valid Anagram", "Easy"),
-    lc("group-anagrams", "Group Anagrams", "Medium"),
-    lc("3sum", "3Sum", "Medium"),
+    lc("valid-anagram", "Valid Anagram", "Easy", sortingValidAnagramSolution),
+    lc("group-anagrams", "Group Anagrams", "Medium", sortingGroupAnagramsSolution),
+    lc("3sum", "3Sum", "Medium", sortingThreeSumSolution),
   ),
   "frequency-map": pack(
     "Counts first, decisions second. Anagrams, majority, budgets.",
@@ -273,9 +398,9 @@ def is_anagram(s, t):
   return true;
 }`,
     ),
-    lc("valid-anagram", "Valid Anagram", "Easy"),
-    lc("majority-element", "Majority Element", "Easy"),
-    lc("top-k-frequent-elements", "Top K Frequent", "Medium"),
+    lc("valid-anagram", "Valid Anagram", "Easy", validAnagramSolution),
+    lc("majority-element", "Majority Element", "Easy", majorityElementSolution),
+    lc("top-k-frequent-elements", "Top K Frequent", "Medium", topKFrequentElementsSolution),
   ),
   "classic-binary-search": pack(
     "Sorted index space; shrink lo/hi on a mid test.",
@@ -319,9 +444,9 @@ def is_anagram(s, t):
   return -1;
 }`,
     ),
-    lc("binary-search", "Binary Search", "Easy"),
-    lc("search-insert-position", "Search Insert Position", "Easy"),
-    lc("search-in-rotated-sorted-array", "Search in Rotated Array", "Medium"),
+    lc("binary-search", "Binary Search", "Easy", binarySearchSolution),
+    lc("search-insert-position", "Search Insert Position", "Easy", searchInsertPositionSolution),
+    lc("search-in-rotated-sorted-array", "Search in Rotated Array", "Medium", searchInRotatedSortedArraySolution),
   ),
   "first-last-occurrence": pack(
     "Find leftmost / rightmost true in a monotonic predicate.",
@@ -363,9 +488,9 @@ def is_anagram(s, t):
   return ans;
 }`,
     ),
-    lc("find-first-and-last-position-of-element-in-sorted-array", "First and Last Position", "Medium"),
-    lc("first-bad-version", "First Bad Version", "Easy"),
-    lc("sqrtx", "Sqrt(x)", "Easy"),
+    lc("find-first-and-last-position-of-element-in-sorted-array", "First and Last Position", "Medium", findFirstAndLastPositionSolution),
+    lc("first-bad-version", "First Bad Version", "Easy", firstBadVersionSolution),
+    lc("sqrtx", "Sqrt(x)", "Easy", sqrtxSolution),
   ),
   "lower-upper-bound": pack(
     "First index >= x (lower) or > x (upper).",
@@ -405,9 +530,9 @@ def is_anagram(s, t):
   return lo;
 }`,
     ),
-    lc("search-insert-position", "Search Insert Position", "Easy"),
-    lc("find-first-and-last-position-of-element-in-sorted-array", "First and Last Position", "Medium"),
-    lc("find-smallest-letter-greater-than-target", "Smallest Letter GT Target", "Easy"),
+    lc("search-insert-position", "Search Insert Position", "Easy", searchInsertBoundSolution),
+    lc("find-first-and-last-position-of-element-in-sorted-array", "First and Last Position", "Medium", firstLastBoundSolution),
+    lc("find-smallest-letter-greater-than-target", "Smallest Letter GT Target", "Easy", smallestLetterGreaterSolution),
   ),
   "binary-search-on-answer": pack(
     "Answer is numeric and monotonic: can(mid) true ⇒ try smaller (or larger).",
@@ -443,9 +568,9 @@ def is_anagram(s, t):
   return lo;
 }`,
     ),
-    lc("koko-eating-bananas", "Koko Eating Bananas", "Medium"),
-    lc("capacity-to-ship-packages-within-d-days", "Ship Packages", "Medium"),
-    lc("split-array-largest-sum", "Split Array Largest Sum", "Hard"),
+    lc("koko-eating-bananas", "Koko Eating Bananas", "Medium", kokoEatingBananasSolution),
+    lc("capacity-to-ship-packages-within-d-days", "Ship Packages", "Medium", capacityToShipPackagesSolution),
+    lc("split-array-largest-sum", "Split Array Largest Sum", "Hard", splitArrayLargestSumSolution),
   ),
   "hashmap-lookup": pack(
     "Need a pair/complement in O(1) after one pass.",
@@ -480,9 +605,9 @@ def is_anagram(s, t):
   }
 }`,
     ),
-    lc("two-sum", "Two Sum", "Easy"),
-    lc("contains-duplicate", "Contains Duplicate", "Easy"),
-    lc("contains-duplicate-ii", "Contains Duplicate II", "Easy"),
+    lc("two-sum", "Two Sum", "Easy", twoSumSolution),
+    lc("contains-duplicate", "Contains Duplicate", "Easy", containsDuplicateSolution),
+    lc("contains-duplicate-ii", "Contains Duplicate II", "Easy", containsDuplicateIISolution),
   ),
   "frequency-counting": pack(
     "Histogram of values, then scan the map not the array.",
@@ -510,9 +635,9 @@ def top_char(s):
   return Object.entries(c).sort((a, b) => b[1] - a[1])[0];
 }`,
     ),
-    lc("first-unique-character-in-a-string", "First Unique Character", "Easy"),
-    lc("group-anagrams", "Group Anagrams", "Medium"),
-    lc("sort-characters-by-frequency", "Sort by Frequency", "Medium"),
+    lc("first-unique-character-in-a-string", "First Unique Character", "Easy", firstUniqueCharacterSolution),
+    lc("group-anagrams", "Group Anagrams", "Medium", frequencyGroupAnagramsSolution),
+    lc("sort-characters-by-frequency", "Sort by Frequency", "Medium", sortCharactersByFrequencySolution),
   ),
   "set-detection": pack(
     "Membership / seen-before: duplicate, cycle of values, consecutive streak.",
@@ -542,9 +667,9 @@ def top_char(s):
   return false;
 }`,
     ),
-    lc("contains-duplicate", "Contains Duplicate", "Easy"),
-    lc("happy-number", "Happy Number", "Easy"),
-    lc("longest-consecutive-sequence", "Longest Consecutive Sequence", "Medium"),
+    lc("contains-duplicate", "Contains Duplicate", "Easy", containsDuplicateSetSolution),
+    lc("happy-number", "Happy Number", "Easy", setHappyNumberSolution),
+    lc("longest-consecutive-sequence", "Longest Consecutive Sequence", "Medium", longestConsecutiveSequenceSolution),
   ),
   "fast-slow-pointer": pack(
     "Linked list middle, cycle, or happy-number loop.",
@@ -580,9 +705,9 @@ def top_char(s):
   return false;
 }`,
     ),
-    lc("linked-list-cycle", "Linked List Cycle", "Easy"),
-    lc("middle-of-the-linked-list", "Middle of Linked List", "Easy"),
-    lc("happy-number", "Happy Number", "Easy"),
+    lc("linked-list-cycle", "Linked List Cycle", "Easy", linkedListCycleSolution),
+    lc("middle-of-the-linked-list", "Middle of Linked List", "Easy", middleOfLinkedListSolution),
+    lc("happy-number", "Happy Number", "Easy", fastSlowHappyNumberSolution),
   ),
   "reverse-linked-list": pack(
     "Rewire next to prev; iterate or reverse a window.",
@@ -622,9 +747,9 @@ def top_char(s):
   return prev;
 }`,
     ),
-    lc("reverse-linked-list", "Reverse Linked List", "Easy"),
-    lc("reverse-linked-list-ii", "Reverse Linked List II", "Medium"),
-    lc("reverse-nodes-in-k-group", "Reverse Nodes in k-Group", "Hard"),
+    lc("reverse-linked-list", "Reverse Linked List", "Easy", reverseLinkedListSolution),
+    lc("reverse-linked-list-ii", "Reverse Linked List II", "Medium", reverseLinkedListIISolution),
+    lc("reverse-nodes-in-k-group", "Reverse Nodes in k-Group", "Hard", reverseNodesInKGroupSolution),
   ),
   "merge-lists": pack(
     "Two sorted streams; always take the smaller head.",
@@ -668,9 +793,9 @@ def top_char(s):
   return dummy.next;
 }`,
     ),
-    lc("merge-two-sorted-lists", "Merge Two Sorted Lists", "Easy"),
-    lc("merge-sorted-array", "Merge Sorted Array", "Easy"),
-    lc("merge-k-sorted-lists", "Merge k Sorted Lists", "Hard"),
+    lc("merge-two-sorted-lists", "Merge Two Sorted Lists", "Easy", mergeTwoSortedListsSolution),
+    lc("merge-sorted-array", "Merge Sorted Array", "Easy", mergeSortedArraySolution),
+    lc("merge-k-sorted-lists", "Merge k Sorted Lists", "Hard", mergeKSortedListsSolution),
   ),
   "cycle-detection": pack(
     "Floyd: meet in the loop, then one pointer at head to find entrance.",
@@ -722,9 +847,9 @@ def top_char(s):
   return null;
 }`,
     ),
-    lc("linked-list-cycle", "Linked List Cycle", "Easy"),
-    lc("linked-list-cycle-ii", "Linked List Cycle II", "Medium"),
-    lc("find-the-duplicate-number", "Find the Duplicate Number", "Medium"),
+    lc("linked-list-cycle", "Linked List Cycle", "Easy", linkedListCycleDetectSolution),
+    lc("linked-list-cycle-ii", "Linked List Cycle II", "Medium", linkedListCycleIISolution),
+    lc("find-the-duplicate-number", "Find the Duplicate Number", "Medium", findTheDuplicateNumberSolution),
   ),
   "valid-parentheses": pack(
     "Stack of openers; closer must match the top.",
@@ -773,9 +898,9 @@ def top_char(s):
   return st.length === 0;
 }`,
     ),
-    lc("valid-parentheses", "Valid Parentheses", "Easy"),
-    lc("minimum-add-to-make-parentheses-valid", "Min Add to Valid", "Medium"),
-    lc("longest-valid-parentheses", "Longest Valid Parentheses", "Hard"),
+    lc("valid-parentheses", "Valid Parentheses", "Easy", validParenthesesSolution),
+    lc("minimum-add-to-make-parentheses-valid", "Min Add to Valid", "Medium", minAddToMakeValidSolution),
+    lc("longest-valid-parentheses", "Longest Valid Parentheses", "Hard", longestValidParenthesesSolution),
   ),
   "infix-prefix-postfix": pack(
     "Shunting-yard / stack: operators wait for precedence.",
@@ -829,9 +954,9 @@ def top_char(s):
   return st.at(-1);
 }`,
     ),
-    lc("evaluate-reverse-polish-notation", "Evaluate RPN", "Medium"),
-    gfg("convert-infix-expression-to-postfix-expression", "Infix to Postfix", "Medium"),
-    lc("basic-calculator-ii", "Basic Calculator II", "Medium"),
+    lc("evaluate-reverse-polish-notation", "Evaluate RPN", "Medium", evaluateRPNSolution),
+    gfg("convert-infix-expression-to-postfix-expression", "Infix to Postfix", "Medium", infixToPostfixSolution),
+    lc("basic-calculator-ii", "Basic Calculator II", "Medium", basicCalculatorIISolution),
   ),
   "next-greater-element": pack(
     "Monotonic decreasing stack of indices; pop when a bigger value arrives.",
@@ -871,9 +996,9 @@ def top_char(s):
   return nge;
 }`,
     ),
-    lc("next-greater-element-i", "Next Greater Element I", "Easy"),
-    lc("daily-temperatures", "Daily Temperatures", "Medium"),
-    lc("next-greater-element-ii", "Next Greater Element II", "Medium"),
+    lc("next-greater-element-i", "Next Greater Element I", "Easy", nextGreaterElementISolution),
+    lc("daily-temperatures", "Daily Temperatures", "Medium", dailyTemperaturesNGESolution),
+    lc("next-greater-element-ii", "Next Greater Element II", "Medium", nextGreaterElementIISolution),
   ),
   "monotonic-stack": pack(
     "Next smaller/greater, histogram, trapping rain — stack stays sorted.",
@@ -917,9 +1042,9 @@ def top_char(s):
   return ans;
 }`,
     ),
-    lc("daily-temperatures", "Daily Temperatures", "Medium"),
-    lc("largest-rectangle-in-histogram", "Largest Rectangle", "Hard"),
-    lc("trapping-rain-water", "Trapping Rain Water", "Hard"),
+    lc("daily-temperatures", "Daily Temperatures", "Medium", dailyTemperaturesMonoSolution),
+    lc("largest-rectangle-in-histogram", "Largest Rectangle", "Hard", largestRectangleInHistogramSolution),
+    lc("trapping-rain-water", "Trapping Rain Water", "Hard", trappingRainWaterSolution),
   ),
   "pick-not-pick": pack(
     "At index i: take it (and recurse) or skip it. Undo after take.",
@@ -954,9 +1079,9 @@ def top_char(s):
   return out;
 }`,
     ),
-    lc("subsets", "Subsets", "Medium"),
-    lc("combination-sum", "Combination Sum", "Medium"),
-    lc("path-sum", "Path Sum", "Easy"),
+    lc("subsets", "Subsets", "Medium", subsetsSolution),
+    lc("combination-sum", "Combination Sum", "Medium", combinationSumSolution),
+    lc("path-sum", "Path Sum", "Easy", pathSumSolution),
   ),
   "recursive-tree": pack(
     "Answer for a node = combine left and right recursive answers.",
@@ -977,9 +1102,9 @@ def top_char(s):
   return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
 }`,
     ),
-    lc("maximum-depth-of-binary-tree", "Max Depth", "Easy"),
-    lc("invert-binary-tree", "Invert Binary Tree", "Easy"),
-    lc("symmetric-tree", "Symmetric Tree", "Easy"),
+    lc("maximum-depth-of-binary-tree", "Max Depth", "Easy", maximumDepthOfBinaryTreeSolution),
+    lc("invert-binary-tree", "Invert Binary Tree", "Easy", invertBinaryTreeSolution),
+    lc("symmetric-tree", "Symmetric Tree", "Easy", symmetricTreeSolution),
   ),
   "backtracking-intro": pack(
     "Choose, recurse, undo. Build a path until a complete/valid state.",
@@ -1029,8 +1154,8 @@ def top_char(s):
   return out;
 }`,
     ),
-    lc("permutations", "Permutations", "Medium"),
-    lc("generate-parentheses", "Generate Parentheses", "Medium"),
-    lc("word-search", "Word Search", "Medium"),
+    lc("permutations", "Permutations", "Medium", permutationsSolution),
+    lc("generate-parentheses", "Generate Parentheses", "Medium", generateParenthesesSolution),
+    lc("word-search", "Word Search", "Medium", wordSearchSolution),
   ),
 };

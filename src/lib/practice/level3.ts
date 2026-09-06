@@ -1,5 +1,171 @@
 import type { PracticePack } from "../types";
 import { gfg, langs, lc, pack } from "./helpers";
+import {
+  implementTrieAutocompleteSolution,
+  replaceWordsSolution,
+  searchSuggestionsSystemSolution,
+} from "./solutions/autocomplete";
+import {
+  bellmanFordGfgSolution,
+  cheapestFlightsBellmanSolution,
+  networkDelayBellmanSolution,
+} from "./solutions/bellmanFord";
+import {
+  kthAncestorSolution,
+  lcaBinaryLiftingSolution,
+  stepByStepDirectionsSolution,
+} from "./solutions/binaryLifting";
+import {
+  countingBitsSolution,
+  numberOf1BitsSolution,
+  subsetsBitMaskingSolution,
+} from "./solutions/bitMasking";
+import {
+  coinChangeIISolution,
+  coinChangeSolution,
+  combinationSumIVSolution,
+} from "./solutions/coinChange";
+import {
+  cheapestFlightsKStopsDijkstraSolution,
+  networkDelayTimeSolution,
+  pathWithMinimumEffortSolution,
+} from "./solutions/dijkstra";
+import {
+  accountsMergeSolution,
+  equalityEquationsSolution,
+  numberOfProvincesDsuSolution,
+} from "./solutions/dsuComponents";
+import {
+  graphValidTreeSolution,
+  redundantConnectionIISolution,
+  redundantConnectionSolution,
+} from "./solutions/dsuCycle";
+import {
+  deleteOperationEditSolution,
+  editDistanceSolution,
+  isSubsequenceSolution,
+} from "./solutions/editDistance";
+import {
+  climbingStairsFibSolution,
+  decodeWaysSolution,
+  fibonacciNumberSolution,
+} from "./solutions/fibonacciPattern";
+import {
+  courseScheduleIVFloydSolution,
+  evaluateDivisionSolution,
+  findTheCitySolution,
+} from "./solutions/floydWarshall";
+import {
+  dungeonGameSolution,
+  minimumPathSumGridSolution,
+  uniquePathsGridSolution,
+} from "./solutions/gridDp";
+import {
+  houseRobberIISolution,
+  houseRobberIIISolution,
+  houseRobberSolution,
+} from "./solutions/houseRobber";
+import {
+  onesAndZeroesSolution,
+  partitionEqualKnapsackSolution,
+  targetSumKnapsackSolution,
+} from "./solutions/knapsack";
+import {
+  criticalMSTEdgesKruskalSolution,
+  kruskalGfgSolution,
+  minCostConnectPointsKruskalSolution,
+} from "./solutions/kruskal";
+import {
+  deleteOperationTwoStringsSolution,
+  longestCommonSubsequenceSolution,
+  longestPalindromicSubsequenceSolution,
+} from "./solutions/lcsLps";
+import {
+  longestIncreasingSubsequenceSolution,
+  numberOfLISSolution,
+  russianDollEnvelopesSolution,
+} from "./solutions/lis";
+import {
+  closestSubsequenceSumSolution,
+  minSumDifferenceSolution,
+  onesAndZeroesMitmSolution,
+} from "./solutions/meetInMiddle";
+import {
+  findAllDisappearedSolution,
+  firstMissingPositiveSolution,
+  missingNumberSolution,
+} from "./solutions/missingNumber";
+import {
+  mosAlgorithmGfgSolution,
+  onlineMajorityElementSolution,
+  rangeFrequencyQueriesSolution,
+} from "./solutions/mosAlgorithm";
+import {
+  criticalMSTEdgesSolution,
+  minCostConnectPointsSolution,
+  optimizeWaterDistributionSolution,
+} from "./solutions/mst";
+import {
+  climbingStairs1dSolution,
+  houseRobber1dSolution,
+  minCostClimbingStairsSolution,
+} from "./solutions/oneDDp";
+import {
+  longestPalindromicSubstringSolution,
+  palindromePartitioningIISolution,
+  palindromePartitioningSolution,
+} from "./solutions/palindromePartition";
+import {
+  lastStoneWeightIISolution,
+  partitionEqualSolution,
+  partitionToKSubsetsPartitionSolution,
+} from "./solutions/partitionEqual";
+import {
+  partitionEqualSubsetSumSolution,
+  partitionToKEqualSumSubsetsSolution,
+  targetSumSubsetSolution,
+} from "./solutions/subsetSum";
+import {
+  repeatedDnaSequencesSolution,
+  subsetsBitsSolution,
+  subsetsIIBitsSolution,
+} from "./solutions/subsetsBits";
+import {
+  courseScheduleIITopoSolution,
+  courseScheduleIVSolution,
+  courseScheduleTopoSolution,
+} from "./solutions/topoSort";
+import {
+  addAndSearchWordsSolution,
+  implementTrieSolution,
+  mapSumPairsSolution,
+} from "./solutions/trieInsertSearch";
+import {
+  minimumPathSum2dSolution,
+  uniquePathsIISolution,
+  uniquePathsSolution,
+} from "./solutions/twoDDp";
+import {
+  editDistanceWildcardSolution,
+  regexMatchingSolution,
+  wildcardMatchingSolution,
+} from "./solutions/wildcardMatching";
+import {
+  constrainedSubsequenceSumSolution,
+  jumpGameVISolution,
+  slidingWindowMaximumSolution,
+} from "./solutions/windowDp";
+import {
+  implementTrieWordSearchSolution,
+  wordSearchIISolution,
+  wordSearchL3Solution,
+} from "./solutions/wordSearchL3";
+import {
+  singleNumberIISolution,
+  singleNumberIIISolution,
+  singleNumberSolution,
+} from "./solutions/xorTricks";
+
 
 export const level3Practice: Record<string, PracticePack> = {
   "1d-dp": pack(
@@ -39,9 +205,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return b;
 }`,
     ),
-    lc("climbing-stairs", "Climbing Stairs", "Easy"),
-    lc("min-cost-climbing-stairs", "Min Cost Climbing Stairs", "Easy"),
-    lc("house-robber", "House Robber", "Medium"),
+    lc("climbing-stairs", "Climbing Stairs", "Easy", climbingStairs1dSolution),
+    lc("min-cost-climbing-stairs", "Min Cost Climbing Stairs", "Easy", minCostClimbingStairsSolution),
+    lc("house-robber", "House Robber", "Medium", houseRobber1dSolution),
   ),
   "fibonacci-pattern": pack(
     "Next = sum of previous two. Climb, tile, decode ways.",
@@ -73,9 +239,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return a;
 }`,
     ),
-    lc("fibonacci-number", "Fibonacci Number", "Easy"),
-    lc("climbing-stairs", "Climbing Stairs", "Easy"),
-    lc("decode-ways", "Decode Ways", "Medium"),
+    lc("fibonacci-number", "Fibonacci Number", "Easy", fibonacciNumberSolution),
+    lc("climbing-stairs", "Climbing Stairs", "Easy", climbingStairsFibSolution),
+    lc("decode-ways", "Decode Ways", "Medium", decodeWaysSolution),
   ),
   "house-robber": pack(
     "dp[i] = max(skip dp[i-1], rob nums[i] + dp[i-2]).",
@@ -109,9 +275,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return cur;
 }`,
     ),
-    lc("house-robber", "House Robber", "Medium"),
-    lc("house-robber-ii", "House Robber II", "Medium"),
-    lc("house-robber-iii", "House Robber III", "Medium"),
+    lc("house-robber", "House Robber", "Medium", houseRobberSolution),
+    lc("house-robber-ii", "House Robber II", "Medium", houseRobberIISolution),
+    lc("house-robber-iii", "House Robber III", "Medium", houseRobberIIISolution),
   ),
   "coin-change": pack(
     "dp[x] = min coins for amount x. Unbounded: try each coin.",
@@ -159,9 +325,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return dp[amount] < inf ? dp[amount] : -1;
 }`,
     ),
-    lc("coin-change", "Coin Change", "Medium"),
-    lc("coin-change-ii", "Coin Change II", "Medium"),
-    lc("combination-sum-iv", "Combination Sum IV", "Medium"),
+    lc("coin-change", "Coin Change", "Medium", coinChangeSolution),
+    lc("coin-change-ii", "Coin Change II", "Medium", coinChangeIISolution),
+    lc("combination-sum-iv", "Combination Sum IV", "Medium", combinationSumIVSolution),
   ),
   "2d-dp": pack(
     "dp[i][j] from left / up / diagonal. Two sequences or a grid.",
@@ -195,9 +361,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return dp[n - 1];
 }`,
     ),
-    lc("unique-paths", "Unique Paths", "Medium"),
-    lc("unique-paths-ii", "Unique Paths II", "Medium"),
-    lc("minimum-path-sum", "Minimum Path Sum", "Medium"),
+    lc("unique-paths", "Unique Paths", "Medium", uniquePathsSolution),
+    lc("unique-paths-ii", "Unique Paths II", "Medium", uniquePathsIISolution),
+    lc("minimum-path-sum", "Minimum Path Sum", "Medium", minimumPathSum2dSolution),
   ),
   knapsack: pack(
     "0/1: iterate capacity backward. Unbounded: forward.",
@@ -233,9 +399,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return dp[W];
 }`,
     ),
-    lc("partition-equal-subset-sum", "Partition Equal Subset", "Medium"),
-    lc("target-sum", "Target Sum", "Medium"),
-    lc("ones-and-zeroes", "Ones and Zeroes", "Medium"),
+    lc("partition-equal-subset-sum", "Partition Equal Subset", "Medium", partitionEqualKnapsackSolution),
+    lc("target-sum", "Target Sum", "Medium", targetSumKnapsackSolution),
+    lc("ones-and-zeroes", "Ones and Zeroes", "Medium", onesAndZeroesSolution),
   ),
   "lcs-lps": pack(
     "Match: 1 + diagonal. Else max(left, up). LPS = LCS(s, reverse s).",
@@ -284,9 +450,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return dp[n][m];
 }`,
     ),
-    lc("longest-common-subsequence", "Longest Common Subsequence", "Medium"),
-    lc("longest-palindromic-subsequence", "Longest Palindromic Subseq", "Medium"),
-    lc("delete-operation-for-two-strings", "Delete Operation", "Medium"),
+    lc("longest-common-subsequence", "Longest Common Subsequence", "Medium", longestCommonSubsequenceSolution),
+    lc("longest-palindromic-subsequence", "Longest Palindromic Subseq", "Medium", longestPalindromicSubsequenceSolution),
+    lc("delete-operation-for-two-strings", "Delete Operation", "Medium", deleteOperationTwoStringsSolution),
   ),
   "grid-dp": pack(
     "dp[r][c] = grid + min/max of allowed previous cells (usually up, left).",
@@ -341,9 +507,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return grid[m - 1][n - 1];
 }`,
     ),
-    lc("minimum-path-sum", "Minimum Path Sum", "Medium"),
-    lc("unique-paths", "Unique Paths", "Medium"),
-    lc("dungeon-game", "Dungeon Game", "Hard"),
+    lc("minimum-path-sum", "Minimum Path Sum", "Medium", minimumPathSumGridSolution),
+    lc("unique-paths", "Unique Paths", "Medium", uniquePathsGridSolution),
+    lc("dungeon-game", "Dungeon Game", "Hard", dungeonGameSolution),
   ),
   lis: pack(
     "dp[i] = 1 + max dp[j] for j < i and a[j] < a[i]. Or patience tails.",
@@ -387,9 +553,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return best;
 }`,
     ),
-    lc("longest-increasing-subsequence", "LIS", "Medium"),
-    lc("russian-doll-envelopes", "Russian Doll Envelopes", "Hard"),
-    lc("number-of-longest-increasing-subsequence", "Number of LIS", "Medium"),
+    lc("longest-increasing-subsequence", "LIS", "Medium", longestIncreasingSubsequenceSolution),
+    lc("russian-doll-envelopes", "Russian Doll Envelopes", "Hard", russianDollEnvelopesSolution),
+    lc("number-of-longest-increasing-subsequence", "Number of LIS", "Medium", numberOfLISSolution),
   ),
   "subset-sum": pack(
     "Boolean 0/1 knapsack: can[t] |= can[t - a[i]], fill backward.",
@@ -425,9 +591,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return can[target];
 }`,
     ),
-    lc("partition-equal-subset-sum", "Partition Equal Subset", "Medium"),
-    lc("target-sum", "Target Sum", "Medium"),
-    lc("partition-to-k-equal-sum-subsets", "Partition to K Subsets", "Medium"),
+    lc("partition-equal-subset-sum", "Partition Equal Subset", "Medium", partitionEqualSubsetSumSolution),
+    lc("target-sum", "Target Sum", "Medium", targetSumSubsetSolution),
+    lc("partition-to-k-equal-sum-subsets", "Partition to K Subsets", "Medium", partitionToKEqualSumSubsetsSolution),
   ),
   "partition-equal": pack(
     "Odd total → no. Else subset-sum half.",
@@ -477,9 +643,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return can[target];
 }`,
     ),
-    lc("partition-equal-subset-sum", "Partition Equal Subset", "Medium"),
-    lc("last-stone-weight-ii", "Last Stone Weight II", "Medium"),
-    lc("partition-to-k-equal-sum-subsets", "Partition to K Subsets", "Medium"),
+    lc("partition-equal-subset-sum", "Partition Equal Subset", "Medium", partitionEqualSolution),
+    lc("last-stone-weight-ii", "Last Stone Weight II", "Medium", lastStoneWeightIISolution),
+    lc("partition-to-k-equal-sum-subsets", "Partition to K Subsets", "Medium", partitionToKSubsetsPartitionSolution),
   ),
   "edit-distance": pack(
     "dp[i][j] = min insert, delete, replace. Match is free on the diagonal.",
@@ -538,9 +704,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return dp[n][m];
 }`,
     ),
-    lc("edit-distance", "Edit Distance", "Medium"),
-    lc("delete-operation-for-two-strings", "Delete Operation", "Medium"),
-    lc("is-subsequence", "Is Subsequence", "Easy"),
+    lc("edit-distance", "Edit Distance", "Medium", editDistanceSolution),
+    lc("delete-operation-for-two-strings", "Delete Operation", "Medium", deleteOperationEditSolution),
+    lc("is-subsequence", "Is Subsequence", "Easy", isSubsequenceSolution),
   ),
   "wildcard-matching": pack(
     "? one char. * empty-or-more: from left (eat s) or up (eat *).",
@@ -605,9 +771,9 @@ export const level3Practice: Record<string, PracticePack> = {
   return dp[n][m];
 }`,
     ),
-    lc("wildcard-matching", "Wildcard Matching", "Hard"),
-    lc("regular-expression-matching", "Regex Matching", "Hard"),
-    lc("edit-distance", "Edit Distance", "Medium"),
+    lc("wildcard-matching", "Wildcard Matching", "Hard", wildcardMatchingSolution),
+    lc("regular-expression-matching", "Regex Matching", "Hard", regexMatchingSolution),
+    lc("edit-distance", "Edit Distance", "Medium", editDistanceWildcardSolution),
   ),
   "palindrome-partition": pack(
     "Precompute pal[l][r]. Then min cuts or list partitions via backtrack.",
@@ -693,9 +859,9 @@ List<List<String>> partition(String s) {
   return out;
 }`,
     ),
-    lc("palindrome-partitioning", "Palindrome Partitioning", "Medium"),
-    lc("palindrome-partitioning-ii", "Palindrome Partitioning II", "Hard"),
-    lc("longest-palindromic-substring", "Longest Palindromic Substring", "Medium"),
+    lc("palindrome-partitioning", "Palindrome Partitioning", "Medium", palindromePartitioningSolution),
+    lc("palindrome-partitioning-ii", "Palindrome Partitioning II", "Hard", palindromePartitioningIISolution),
+    lc("longest-palindromic-substring", "Longest Palindromic Substring", "Medium", longestPalindromicSubstringSolution),
   ),
   "topo-sort": pack(
     "Kahn: queue indegree 0. Or DFS finish times reversed. DAG only.",
@@ -761,9 +927,9 @@ def topo(n, edges):
   return order.length === n ? order : [];
 }`,
     ),
-    lc("course-schedule", "Course Schedule", "Medium"),
-    lc("course-schedule-ii", "Course Schedule II", "Medium"),
-    lc("course-schedule-iv", "Course Schedule IV", "Medium"),
+    lc("course-schedule", "Course Schedule", "Medium", courseScheduleTopoSolution),
+    lc("course-schedule-ii", "Course Schedule II", "Medium", courseScheduleIITopoSolution),
+    lc("course-schedule-iv", "Course Schedule IV", "Medium", courseScheduleIVSolution),
   ),
   dijkstra: pack(
     "Non-negative weights. Pop closest unsettled, relax edges.",
@@ -855,9 +1021,9 @@ def dijkstra(n, edges, src):
   return dist;
 }`,
     ),
-    lc("network-delay-time", "Network Delay Time", "Medium"),
-    lc("path-with-minimum-effort", "Path With Minimum Effort", "Medium"),
-    lc("cheapest-flights-within-k-stops", "Cheapest Flights K Stops", "Medium"),
+    lc("network-delay-time", "Network Delay Time", "Medium", networkDelayTimeSolution),
+    lc("path-with-minimum-effort", "Path With Minimum Effort", "Medium", pathWithMinimumEffortSolution),
+    lc("cheapest-flights-within-k-stops", "Cheapest Flights K Stops", "Medium", cheapestFlightsKStopsDijkstraSolution),
   ),
   "bellman-ford": pack(
     "Relax all edges V-1 times. Extra pass still relaxing ⇒ negative cycle.",
@@ -902,9 +1068,9 @@ def dijkstra(n, edges, src):
   return dist;
 }`,
     ),
-    lc("cheapest-flights-within-k-stops", "Cheapest Flights K Stops", "Medium"),
-    lc("network-delay-time", "Network Delay Time", "Medium"),
-    gfg("bellman-ford-algorithm-dp-23", "Bellman Ford (GFG)", "Medium"),
+    lc("cheapest-flights-within-k-stops", "Cheapest Flights K Stops", "Medium", cheapestFlightsBellmanSolution),
+    lc("network-delay-time", "Network Delay Time", "Medium", networkDelayBellmanSolution),
+    gfg("bellman-ford-algorithm-dp-23", "Bellman Ford (GFG)", "Medium", bellmanFordGfgSolution),
   ),
   "floyd-warshall": pack(
     "for k, for i, for j: dist[i][j] = min(..., dist[i][k]+dist[k][j]).",
@@ -945,9 +1111,9 @@ def dijkstra(n, edges, src):
   return dist;
 }`,
     ),
-    lc("find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance", "City With Smallest Neighbors", "Medium"),
-    lc("evaluate-division", "Evaluate Division", "Medium"),
-    lc("course-schedule-iv", "Course Schedule IV", "Medium"),
+    lc("find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance", "City With Smallest Neighbors", "Medium", findTheCitySolution),
+    lc("evaluate-division", "Evaluate Division", "Medium", evaluateDivisionSolution),
+    lc("course-schedule-iv", "Course Schedule IV", "Medium", courseScheduleIVFloydSolution),
   ),
   mst: pack(
     "Prim: grow cheapest cut edge. Kruskal: sort edges, DSU skip cycles.",
@@ -1013,9 +1179,9 @@ def dijkstra(n, edges, src):
   return total;
 }`,
     ),
-    lc("min-cost-to-connect-all-points", "Min Cost Connect Points", "Medium"),
-    lc("optimize-water-distribution-in-a-village", "Optimize Water Distribution", "Hard"),
-    lc("find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree", "Critical MST Edges", "Hard"),
+    lc("min-cost-to-connect-all-points", "Min Cost Connect Points", "Medium", minCostConnectPointsSolution),
+    lc("optimize-water-distribution-in-a-village", "Optimize Water Distribution", "Hard", optimizeWaterDistributionSolution),
+    lc("find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree", "Critical MST Edges", "Hard", criticalMSTEdgesSolution),
   ),
   "dsu-cycle": pack(
     "Undirected edge with find(u)==find(v) closes a cycle. Else union.",
@@ -1077,9 +1243,9 @@ function union(a, b) {
   return true;
 }`,
     ),
-    lc("redundant-connection", "Redundant Connection", "Medium"),
-    lc("redundant-connection-ii", "Redundant Connection II", "Hard"),
-    lc("graph-valid-tree", "Graph Valid Tree", "Medium"),
+    lc("redundant-connection", "Redundant Connection", "Medium", redundantConnectionSolution),
+    lc("redundant-connection-ii", "Redundant Connection II", "Hard", redundantConnectionIISolution),
+    lc("graph-valid-tree", "Graph Valid Tree", "Medium", graphValidTreeSolution),
   ),
   "dsu-components": pack(
     "Start with n sets. Successful union decrements the count.",
@@ -1140,9 +1306,9 @@ function union(a, b) {
   return count;
 }`,
     ),
-    lc("number-of-provinces", "Number of Provinces", "Medium"),
-    lc("satisfiability-of-equality-equations", "Equality Equations", "Medium"),
-    lc("accounts-merge", "Accounts Merge", "Medium"),
+    lc("number-of-provinces", "Number of Provinces", "Medium", numberOfProvincesDsuSolution),
+    lc("satisfiability-of-equality-equations", "Equality Equations", "Medium", equalityEquationsSolution),
+    lc("accounts-merge", "Accounts Merge", "Medium", accountsMergeSolution),
   ),
   kruskal: pack(
     "Sort edges by weight. Add if different DSU roots. Stop at n-1.",
@@ -1207,9 +1373,9 @@ function union(a, b) {
   return used === n - 1 ? total : null;
 }`,
     ),
-    lc("min-cost-to-connect-all-points", "Min Cost Connect Points", "Medium"),
-    gfg("kruskals-minimum-spanning-tree-algorithm-greedy-algo-2", "Kruskal (GFG)", "Medium"),
-    lc("find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree", "Critical MST Edges", "Hard"),
+    lc("min-cost-to-connect-all-points", "Min Cost Connect Points", "Medium", minCostConnectPointsKruskalSolution),
+    gfg("kruskals-minimum-spanning-tree-algorithm-greedy-algo-2", "Kruskal (GFG)", "Medium", kruskalGfgSolution),
+    lc("find-critical-and-pseudo-critical-edges-in-minimum-spanning-tree", "Critical MST Edges", "Hard", criticalMSTEdgesKruskalSolution),
   ),
   "xor-tricks": pack(
     "x^x=0, x^0=x. Pairs cancel; leftover is unique.",
@@ -1235,9 +1401,9 @@ function union(a, b) {
   return acc;
 }`,
     ),
-    lc("single-number", "Single Number", "Easy"),
-    lc("single-number-ii", "Single Number II", "Medium"),
-    lc("single-number-iii", "Single Number III", "Medium"),
+    lc("single-number", "Single Number", "Easy", singleNumberSolution),
+    lc("single-number-ii", "Single Number II", "Medium", singleNumberIISolution),
+    lc("single-number-iii", "Single Number III", "Medium", singleNumberIIISolution),
   ),
   "missing-number": pack(
     "XOR 1..n with all values. Two missings: split by a differing bit.",
@@ -1264,9 +1430,9 @@ function union(a, b) {
   return acc ^ n;
 }`,
     ),
-    lc("missing-number", "Missing Number", "Easy"),
-    lc("find-all-numbers-disappeared-in-an-array", "Find All Disappeared", "Easy"),
-    lc("first-missing-positive", "First Missing Positive", "Hard"),
+    lc("missing-number", "Missing Number", "Easy", missingNumberSolution),
+    lc("find-all-numbers-disappeared-in-an-array", "Find All Disappeared", "Easy", findAllDisappearedSolution),
+    lc("first-missing-positive", "First Missing Positive", "Hard", firstMissingPositiveSolution),
   ),
   "bit-masking": pack(
     "Int as a set: test (m>>i)&1, set m|1<<i, clear m&~(1<<i).",
@@ -1299,9 +1465,9 @@ int clearBit(int mask, int i) { return mask & ~(1 << i); }`,
 function setBit(mask, i) { return mask | (1 << i); }
 function clearBit(mask, i) { return mask & ~(1 << i); }`,
     ),
-    lc("number-of-1-bits", "Number of 1 Bits", "Easy"),
-    lc("counting-bits", "Counting Bits", "Easy"),
-    lc("subsets", "Subsets", "Medium"),
+    lc("number-of-1-bits", "Number of 1 Bits", "Easy", numberOf1BitsSolution),
+    lc("counting-bits", "Counting Bits", "Easy", countingBitsSolution),
+    lc("subsets", "Subsets", "Medium", subsetsBitMaskingSolution),
   ),
   "subsets-bits": pack(
     "For mask in 0..(1<<n)-1, bit i on means a[i] is in the subset.",
@@ -1344,9 +1510,9 @@ function clearBit(mask, i) { return mask & ~(1 << i); }`,
   return out;
 }`,
     ),
-    lc("subsets", "Subsets", "Medium"),
-    lc("subsets-ii", "Subsets II", "Medium"),
-    lc("repeated-dna-sequences", "Repeated DNA Sequences", "Medium"),
+    lc("subsets", "Subsets", "Medium", subsetsBitsSolution),
+    lc("subsets-ii", "Subsets II", "Medium", subsetsIIBitsSolution),
+    lc("repeated-dna-sequences", "Repeated DNA Sequences", "Medium", repeatedDnaSequencesSolution),
   ),
   "trie-insert-search": pack(
     "Each edge a character. Terminal flag marks a full word.",
@@ -1426,9 +1592,9 @@ function clearBit(mask, i) { return mask & ~(1 << i); }`,
   }
 }`,
     ),
-    lc("implement-trie-prefix-tree", "Implement Trie", "Medium"),
-    lc("design-add-and-search-words-data-structure", "Add and Search Words", "Medium"),
-    lc("map-sum-pairs", "Map Sum Pairs", "Medium"),
+    lc("implement-trie-prefix-tree", "Implement Trie", "Medium", implementTrieSolution),
+    lc("design-add-and-search-words-data-structure", "Add and Search Words", "Medium", addAndSearchWordsSolution),
+    lc("map-sum-pairs", "Map Sum Pairs", "Medium", mapSumPairsSolution),
   ),
   "word-search": pack(
     "Board DFS + trie/word. Prune if prefix missing. Mark, recurse, unmark.",
@@ -1496,9 +1662,9 @@ boolean exist(char[][] board, String word) {
   return false;
 }`,
     ),
-    lc("word-search", "Word Search", "Medium"),
-    lc("word-search-ii", "Word Search II", "Hard"),
-    lc("implement-trie-prefix-tree", "Implement Trie", "Medium"),
+    lc("word-search", "Word Search", "Medium", wordSearchL3Solution),
+    lc("word-search-ii", "Word Search II", "Hard", wordSearchIISolution),
+    lc("implement-trie-prefix-tree", "Implement Trie", "Medium", implementTrieWordSearchSolution),
   ),
   autocomplete: pack(
     "Walk the prefix node, then DFS its subtree for terminals.",
@@ -1560,9 +1726,9 @@ List<String> suggestions(Trie root, String prefix) {
   return out;
 }`,
     ),
-    lc("search-suggestions-system", "Search Suggestions System", "Medium"),
-    lc("implement-trie-prefix-tree", "Implement Trie", "Medium"),
-    lc("replace-words", "Replace Words", "Medium"),
+    lc("search-suggestions-system", "Search Suggestions System", "Medium", searchSuggestionsSystemSolution),
+    lc("implement-trie-prefix-tree", "Implement Trie", "Medium", implementTrieAutocompleteSolution),
+    lc("replace-words", "Replace Words", "Medium", replaceWordsSolution),
   ),
   "meet-in-middle": pack(
     "Split n/2, enumerate subset sums, match target-x in the other half.",
@@ -1623,9 +1789,9 @@ function canSum(a, target) {
   return false;
 }`,
     ),
-    lc("closest-subsequence-sum", "Closest Subsequence Sum", "Hard"),
-    lc("partition-array-into-two-arrays-to-minimize-sum-difference", "Min Sum Difference", "Hard"),
-    lc("ones-and-zeroes", "Ones and Zeroes", "Medium"),
+    lc("closest-subsequence-sum", "Closest Subsequence Sum", "Hard", closestSubsequenceSumSolution),
+    lc("partition-array-into-two-arrays-to-minimize-sum-difference", "Min Sum Difference", "Hard", minSumDifferenceSolution),
+    lc("ones-and-zeroes", "Ones and Zeroes", "Medium", onesAndZeroesMitmSolution),
   ),
   "window-dp": pack(
     "dp[i] uses max/min over a window of prior dp. Deque keeps candidates.",
@@ -1685,9 +1851,9 @@ def max_result(a, k):
   return dp[n - 1];
 }`,
     ),
-    lc("jump-game-vi", "Jump Game VI", "Medium"),
-    lc("constrained-subsequence-sum", "Constrained Subsequence Sum", "Hard"),
-    lc("sliding-window-maximum", "Sliding Window Maximum", "Hard"),
+    lc("jump-game-vi", "Jump Game VI", "Medium", jumpGameVISolution),
+    lc("constrained-subsequence-sum", "Constrained Subsequence Sum", "Hard", constrainedSubsequenceSumSolution),
+    lc("sliding-window-maximum", "Sliding Window Maximum", "Hard", slidingWindowMaximumSolution),
   ),
   "binary-lifting": pack(
     "up[u][k] = 2^k-th ancestor. Jump by bits of the distance / LCA.",
@@ -1770,9 +1936,9 @@ function kthAncestor(up, node, k) {
   return node;
 }`,
     ),
-    lc("kth-ancestor-of-a-tree-node", "Kth Ancestor", "Hard"),
-    lc("lowest-common-ancestor-of-a-binary-tree", "LCA", "Medium"),
-    lc("step-by-step-directions-from-a-binary-tree-node-to-another", "Step-by-Step Directions", "Medium"),
+    lc("kth-ancestor-of-a-tree-node", "Kth Ancestor", "Hard", kthAncestorSolution),
+    lc("lowest-common-ancestor-of-a-binary-tree", "LCA", "Medium", lcaBinaryLiftingSolution),
+    lc("step-by-step-directions-from-a-binary-tree-node-to-another", "Step-by-Step Directions", "Medium", stepByStepDirectionsSolution),
   ),
   "mos-algorithm": pack(
     "Offline queries. Sort by block(L), then R. Add/remove while moving L,R.",
@@ -1856,8 +2022,8 @@ function kthAncestor(up, node, k) {
   return ans;
 }`,
     ),
-    lc("range-frequency-queries", "Range Frequency Queries", "Medium"),
-    gfg("mos-algorithm", "Mo's Algorithm (GFG)", "Hard"),
-    lc("online-majority-element-in-subarray", "Online Majority in Subarray", "Hard"),
+    lc("range-frequency-queries", "Range Frequency Queries", "Medium", rangeFrequencyQueriesSolution),
+    gfg("mos-algorithm", "Mo's Algorithm (GFG)", "Hard", mosAlgorithmGfgSolution),
+    lc("online-majority-element-in-subarray", "Online Majority in Subarray", "Hard", onlineMajorityElementSolution),
   ),
 };
