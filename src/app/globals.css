@@ -171,3 +171,38 @@ a { text-decoration: none; }
       rgba(244, 236, 225, 0.035) 28px
     );
 }
+
+/* Code lab syntax highlighting */
+.code-hl-keyword {
+  color: var(--saffron);
+  font-weight: 600;
+}
+
+.code-hl-string {
+  color: var(--jade);
+}
+
+.code-hl-number {
+  color: var(--sky);
+}
+
+.code-hl-comment {
+  color: rgba(185, 171, 153, 0.72);
+  font-style: italic;
+}
+
+.code-hl-preprocessor {
+  color: var(--bronze);
+}
+
+.code-editor-input {
+  -webkit-text-fill-color: transparent;
+}
+
+.code-editor-input::selection {
+  background: rgba(232, 177, 90, 0.35);
+}
+
+.code-editor-input::-moz-selection {
+  background: rgba(232, 177, 90, 0.35);
+}

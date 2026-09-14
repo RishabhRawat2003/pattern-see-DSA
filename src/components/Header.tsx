@@ -106,6 +106,12 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-2 lg:ml-auto">
           <Link
+            href="/playground"
+            className="hidden text-xs text-muted hover:text-paper sm:inline"
+          >
+            Code lab
+          </Link>
+          <Link
             href="/review"
             className="hidden text-xs text-muted hover:text-paper sm:inline"
           >
