@@ -196,13 +196,31 @@ a { text-decoration: none; }
 }
 
 .code-editor-input {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  caret-color: var(--paper);
+}
+
+.code-editor-input::selection,
+.code-editor-input::-moz-selection {
+  background: rgba(126, 180, 212, 0.45);
+  color: transparent;
   -webkit-text-fill-color: transparent;
 }
 
-.code-editor-input::selection {
-  background: rgba(232, 177, 90, 0.35);
+/* While selecting: hide colored overlay, show solid readable text */
+.code-editor-selecting .code-editor-highlight {
+  visibility: hidden;
 }
 
-.code-editor-input::-moz-selection {
-  background: rgba(232, 177, 90, 0.35);
+.code-editor-selecting .code-editor-input {
+  color: var(--paper);
+  -webkit-text-fill-color: var(--paper);
+}
+
+.code-editor-selecting .code-editor-input::selection,
+.code-editor-selecting .code-editor-input::-moz-selection {
+  background: rgba(126, 180, 212, 0.4);
+  color: var(--paper);
+  -webkit-text-fill-color: var(--paper);
 }

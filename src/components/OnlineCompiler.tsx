@@ -83,6 +83,7 @@ export function OnlineCompiler({ variant = "page" }: { variant?: "page" | "embed
   const [consoleTab, setConsoleTab] = useState<ConsoleTab>("output");
   const [running, setRunning] = useState(false);
   const [result, setResult] = useState<RunResult | null>(null);
+  const [isSelecting, setIsSelecting] = useState(false);
   const editorRef = useRef<HTMLTextAreaElement>(null);
   const highlightRef = useRef<HTMLPreElement>(null);
   const lineRef = useRef<HTMLDivElement>(null);
@@ -196,6 +197,12 @@ export function OnlineCompiler({ variant = "page" }: { variant?: "page" | "embed
     }
   };
 
+  const syncSelecting = () => {
+    const ta = editorRef.current;
+    if (!ta) return;
+    setIsSelecting(ta.selectionStart !== ta.selectionEnd);
+  };
+
   const outputText = result
     ? [result.stdout, result.stderr].filter(Boolean).join(result.stdout && result.stderr ? "\n" : "")
     : "";
@@ -297,11 +304,15 @@ export function OnlineCompiler({ variant = "page" }: { variant?: "page" | "embed
               <div key={n}>{n}</div>
             ))}
           </div>
-          <div className="relative min-h-0 flex-1 overflow-hidden">
+          <div
+            className={`relative min-h-0 flex-1 overflow-hidden${
+              isSelecting ? " code-editor-selecting" : ""
+            }`}
+          >
             <pre
               ref={highlightRef}
               aria-hidden
-              className="pointer-events-none absolute inset-0 m-0 overflow-hidden whitespace-pre px-3 py-4 font-mono text-[12px] leading-6 text-paper/92 sm:px-4 sm:text-[13px]"
+              className="code-editor-highlight pointer-events-none absolute inset-0 m-0 overflow-hidden whitespace-pre px-3 py-4 font-mono text-[12px] leading-6 text-paper/92 sm:px-4 sm:text-[13px]"
               dangerouslySetInnerHTML={{ __html: highlightedCode }}
             />
             <textarea
@@ -309,10 +320,14 @@ export function OnlineCompiler({ variant = "page" }: { variant?: "page" | "embed
               value={code}
               onChange={(e) => setCode(e.target.value)}
               onKeyDown={onEditorKeyDown}
+              onKeyUp={syncSelecting}
+              onSelect={syncSelecting}
+              onMouseUp={syncSelecting}
+              onBlur={() => setIsSelecting(false)}
               onScroll={syncScroll}
               spellCheck={false}
               wrap="off"
-              className="code-editor-input relative z-10 min-h-0 h-full w-full flex-1 resize-none overflow-auto bg-transparent px-3 py-4 font-mono text-[12px] leading-6 text-transparent caret-paper outline-none sm:px-4 sm:text-[13px]"
+              className="code-editor-input relative z-10 min-h-0 h-full w-full flex-1 resize-none overflow-auto bg-transparent px-3 py-4 font-mono text-[12px] leading-6 outline-none sm:px-4 sm:text-[13px]"
               aria-label="Code editor"
             />
           </div>
