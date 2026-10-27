@@ -93,6 +93,26 @@ export type PracticePack = {
   problems: [PracticeProblem, PracticeProblem, PracticeProblem];
 };
 
+export type PracticeProblemSummary = {
+  id: string;
+  title: string;
+  difficulty: ProblemDifficulty;
+  url: string;
+  hasSolution: boolean;
+};
+
+export type PracticeSummary = {
+  cue: string;
+  templates: Record<TemplateLang, string>;
+  problems: PracticeProblemSummary[];
+};
+
+export type ProblemSolution = {
+  approach?: string;
+  templates: Record<TemplateLang, string>;
+  frames: Frame[];
+};
+
 export type PatternGroup = {
   id: string;
   title: string;

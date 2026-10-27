@@ -1,9 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CodeRunner } from "@/components/CodeRunner";
 import { PatternPlayer } from "@/components/viz/PatternPlayer";
-import type { PracticePack, PracticeProblem, TemplateLang } from "@/lib/types";
+import { loadProblemSolution } from "@/lib/practice/loadSolution";
+import type { PracticeSummary, ProblemSolution, TemplateLang } from "@/lib/types";
 import {
   getEntry,
   isDue,
@@ -15,10 +16,14 @@ import {
 
 const LANG_KEY = "patternsee-template-lang";
 
-export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack }) {
+export function PatternDrill({ slug, pack }: { slug: string; pack: PracticeSummary }) {
   const [entry, setEntry] = useState<PatternProgress>({ mark: "unset", solved: [] });
   const [lang, setLang] = useState<TemplateLang>("python");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+  const [solutions, setSolutions] = useState<Record<string, ProblemSolution | null>>({});
+  const slugRef = useRef(slug);
+  slugRef.current = slug;
 
   const refresh = useCallback(() => {
     setEntry(getEntry(loadProgress(), slug));
@@ -37,6 +42,40 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
       window.removeEventListener("storage", refresh);
     };
   }, [refresh]);
+
+  useEffect(() => {
+    setOpenId(null);
+    setLoadingId(null);
+    setSolutions({});
+  }, [slug]);
+
+  const fetchSolution = (id: string) => {
+    const requestedSlug = slug;
+    setLoadingId(id);
+    void loadProblemSolution(requestedSlug, id)
+      .then((solution) => {
+        if (slugRef.current !== requestedSlug) return;
+        setSolutions((prev) => ({ ...prev, [id]: solution }));
+      })
+      .catch(() => {
+        if (slugRef.current !== requestedSlug) return;
+        setSolutions((prev) => ({ ...prev, [id]: null }));
+      })
+      .finally(() => {
+        if (slugRef.current !== requestedSlug) return;
+        setLoadingId((current) => (current === id ? null : current));
+      });
+  };
+
+  const openSolution = (id: string) => {
+    if (openId === id) {
+      setOpenId(null);
+      return;
+    }
+    setOpenId(id);
+    if (solutions[id] !== undefined) return;
+    fetchSolution(id);
+  };
 
   const due = isDue(entry);
   const solvedSet = new Set(entry.solved);
@@ -75,8 +114,8 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
         <ul className="mt-4 space-y-2">
           {pack.problems.map((prob) => {
             const on = solvedSet.has(prob.id);
-            const hasSolution = Boolean(prob.templates && prob.frames);
             const open = openId === prob.id;
+            const solution = solutions[prob.id];
             return (
               <li key={prob.id}>
                 <div className="rounded-xl border border-[var(--line)]">
@@ -107,21 +146,51 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
                         </p>
                       </div>
                     </div>
-                    {hasSolution ? (
+                    {prob.hasSolution ? (
                       <button
                         type="button"
                         className={`shrink-0 rounded-full px-3 py-1.5 text-xs ${
                           open ? "bg-saffron text-ink" : "text-muted hover:text-paper"
                         }`}
-                        onClick={() => setOpenId(open ? null : prob.id)}
+                        onClick={() => openSolution(prob.id)}
                         aria-expanded={open}
                       >
                         {open ? "Hide" : "Solution"}
                       </button>
                     ) : null}
                   </div>
-                  {open && hasSolution ? (
-                    <ProblemSolutionPanel problem={prob} lang={lang} setLang={setLang} />
+                  {open && loadingId === prob.id && solution === undefined ? (
+                    <p className="border-t border-[var(--line)] px-3 py-4 text-sm text-muted sm:px-4">
+                      Loading solution…
+                    </p>
+                  ) : null}
+                  {open && solution ? (
+                    <ProblemSolutionPanel
+                      problemId={prob.id}
+                      title={prob.title}
+                      solution={solution}
+                      lang={lang}
+                      setLang={setLang}
+                    />
+                  ) : null}
+                  {open && solution === null && loadingId !== prob.id ? (
+                    <p className="border-t border-[var(--line)] px-3 py-4 text-sm text-muted sm:px-4">
+                      Couldn’t load this solution.{" "}
+                      <button
+                        type="button"
+                        className="text-saffron hover:underline"
+                        onClick={() => {
+                          setSolutions((prev) => {
+                            const next = { ...prev };
+                            delete next[prob.id];
+                            return next;
+                          });
+                          fetchSolution(prob.id);
+                        }}
+                      >
+                        Try again
+                      </button>
+                    </p>
                   ) : null}
                 </div>
               </li>
@@ -161,25 +230,27 @@ export function PatternDrill({ slug, pack }: { slug: string; pack: PracticePack 
 }
 
 function ProblemSolutionPanel({
-  problem,
+  problemId,
+  title,
+  solution,
   lang,
   setLang,
 }: {
-  problem: PracticeProblem;
+  problemId: string;
+  title: string;
+  solution: ProblemSolution;
   lang: TemplateLang;
   setLang: (l: TemplateLang) => void;
 }) {
-  const code = problem.templates![lang];
-
   return (
     <div className="space-y-4 border-t border-[var(--line)] px-3 py-4 sm:px-4">
-      {problem.approach ? (
-        <p className="text-sm leading-7 text-paper/85">{problem.approach}</p>
+      {solution.approach ? (
+        <p className="text-sm leading-7 text-paper/85">{solution.approach}</p>
       ) : null}
-      {problem.frames?.length ? (
+      {solution.frames.length ? (
         <div className="min-w-0">
           <p className="kicker mb-3">Walkthrough</p>
-          <PatternPlayer key={problem.id} frames={problem.frames} />
+          <PatternPlayer key={problemId} frames={solution.frames} />
         </div>
       ) : null}
       <div>
@@ -190,9 +261,9 @@ function ProblemSolutionPanel({
             setLang(l);
             window.localStorage.setItem(LANG_KEY, l);
           }}
-          initialCode={code}
-          resetKey={`${problem.id}-${lang}`}
-          compilerLink={{ label: problem.title }}
+          initialCode={solution.templates[lang]}
+          resetKey={`${problemId}-${lang}`}
+          compilerLink={{ label: title }}
           hint="Opens in the code lab with this solution loaded. Add a call + print if you only see a function."
         />
       </div>

@@ -5,7 +5,8 @@ import { JsonLd } from "@/components/JsonLd";
 import { PatternDrill } from "@/components/PatternDrill";
 import { PatternVisualizer } from "@/components/viz/PatternVisualizer";
 import { allPatterns, getGroupByPattern, getPattern } from "@/lib/curriculum";
-import { getPractice } from "@/lib/practice";
+import { getDemoFrames } from "@/lib/demos";
+import { getPracticeSummary } from "@/lib/practice";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -51,7 +52,8 @@ export default async function PatternPage({
   const idx = siblings.findIndex((p) => p.slug === slug);
   const prev = idx > 0 ? siblings[idx - 1] : undefined;
   const next = idx < siblings.length - 1 ? siblings[idx + 1] : undefined;
-  const practice = getPractice(pattern.slug);
+  const frames = getDemoFrames(pattern.slug);
+  const practice = getPracticeSummary(pattern.slug);
 
   return (
     <main className="mx-auto w-full max-w-5xl min-w-0 flex-1 px-4 py-8 sm:px-6 sm:py-12">
@@ -106,7 +108,7 @@ export default async function PatternPage({
       ) : (
         <>
           <section className="mt-8 min-w-0">
-            <PatternVisualizer slug={pattern.slug} />
+            <PatternVisualizer frames={frames} />
           </section>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <Info title="Intuition" body={pattern.intuition} />

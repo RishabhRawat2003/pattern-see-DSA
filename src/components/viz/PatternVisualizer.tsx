@@ -1,9 +1,6 @@
-"use client";
-
 import { PatternPlayer } from "@/components/viz/PatternPlayer";
-import { getDemoFrames } from "@/lib/demos";
+import type { Frame } from "@/lib/types";
 
-export function PatternVisualizer({ slug }: { slug: string }) {
-  const frames = getDemoFrames(slug);
+export function PatternVisualizer({ frames }: { frames: Frame[] }) {
   return <PatternPlayer frames={frames} />;
 }
